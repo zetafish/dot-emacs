@@ -30,7 +30,11 @@
   (interactive)
   (paradox-require 'moe-theme)
   (moe-theme-set-color 'purple)
-  (moe-dark))
+  (moe-dark)
+  (set-face-background 'default "#000")
+  (set-face-background 'fringe "#000")
+  (set-face-background 'linum "#000")
+  (set-face-foreground 'linum "#444444"))
 
 
 (defun select-theme-monokai ()
