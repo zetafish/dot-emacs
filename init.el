@@ -26,9 +26,12 @@
 (require 'zz-codestyle)
 (require 'zz-ido)
 (require 'zz-helm)
+(require 'zz-complete)
 (require 'zz-project)
 (require 'zz-navigation)
 (require 'zz-git)
+(require 'zz-snippets)
+(require 'zz-flycheck)
 
 (require 'zz-elisp)
 (require 'zz-clojure)
