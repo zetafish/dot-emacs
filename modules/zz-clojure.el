@@ -22,11 +22,12 @@
 
 (with-eval-after-load "flycheck"
   (flycheck-clojure-setup)
-  (setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
+  (setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages)
+  (flycheck-mode))
 
 ;;(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages)
 
 ;;(eval-after-load 'flycheck '(flycheck-clojure-setup))
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;;(add-hook 'after-init-hook #'global-flycheck-mode)
 
 (provide 'zz-clojure)

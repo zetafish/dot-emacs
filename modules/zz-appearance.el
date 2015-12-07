@@ -53,15 +53,34 @@
 (show-paren-mode 1)
 (setq show-paren-style 'paren)
 
+(highlight-parentheses-mode 1)
+
 ;; Nyan Cat!
 (paradox-require 'nyan-mode)
 (nyan-mode 1)
 (setq nyan-bar-length 16
       nyan-wavy-trail t)
 
+;; More status.
+(display-time)
+(display-battery-mode)
+
 ;; Unclutter the modeline
 (paradox-require 'diminish)
+
 (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
+(eval-after-load "ethan-wspace" '(diminish 'ethan-wspace-mode))
+(eval-after-load "paredit" '(diminish 'paredit-mode))
+(eval-after-load "company" '(diminish 'company-mode))
+(eval-after-load "anzu" '(diminish 'anzu-mode))
+(eval-after-load "cider" '(diminish 'cider))
+(eval-after-load "rainbow-mode" '(diminish 'rainbow-mode))
+(eval-after-load "git-gutter" '(diminish 'git-gutter-mode))
+(eval-after-load "projectile" '(diminish 'projectile-mode))
+(eval-after-load "helm" '(diminish 'helm-mode))
+(eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
+(eval-after-load "which-key" '(diminish 'which-key-mode))
+(eval-after-load "volatile-highlights" '(diminish 'volatile-highlights-mode))
 
 (provide 'zz-appearance)
 
