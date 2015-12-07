@@ -36,7 +36,6 @@
   (set-face-background 'linum "#000")
   (set-face-foreground 'linum "#444444"))
 
-
 (defun select-theme-monokai ()
   (interactive)
   (paradox-require 'monokai-theme)
@@ -52,7 +51,8 @@
 (defun select-theme-cyberpunk ()
   (interactive)
   (paradox-require 'cyberpunk-theme)
-  (load-theme 'cyberpunk t))
+  (load-theme 'cyberpunk t)
+  (set-face-foreground 'linum "#444444"))
 
 (defun select-theme-molokai ()
   (interactive)
@@ -63,6 +63,11 @@
   (interactive)
   (paradox-require 'alect-themes)
   (load-theme 'alect-dark t))
+
+(defun select-theme-noctilux ()
+  (interactive)
+  (paradox-require 'noctilux-theme)
+  (load-theme 'noctilux t))
 
 ;;(select-theme-ample)
 ;;(select-theme-monokai)
@@ -126,4 +131,3 @@
 (eval-after-load "flycheck" '(diminish 'flycheck-mode))
 
 (provide 'zz-appearance)
-
