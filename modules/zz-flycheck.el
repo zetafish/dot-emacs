@@ -16,6 +16,7 @@
 ;; Configure the theme
 (with-eval-after-load "flycheck"
   (setq flycheck-highlighting-mode 'symbols)
+  (setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages)
   (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
 
 
