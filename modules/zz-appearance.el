@@ -28,7 +28,7 @@
 
 ;; Use the moe theme, nice 👍
 (paradox-require 'moe-theme)
-(moe-theme-set-color 'green)
+(moe-theme-set-color 'purple)
 (moe-dark)
 
 ;; Show line numbers.
@@ -81,6 +81,7 @@
 (eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
 (eval-after-load "which-key" '(diminish 'which-key-mode))
 (eval-after-load "volatile-highlights" '(diminish 'volatile-highlights-mode))
+(eval-after-load "flycheck" '(diminish 'flycheck-mode))
 
 (provide 'zz-appearance)
 
