@@ -3,4 +3,8 @@ elpa/
 .mc-lists.el
 [#]*[#]
 [.][#]*
-
+url/
+var/
+smex-items
+recentf
+projectile-bookmarks.eld
