@@ -23,6 +23,8 @@
 (require 'zz-appearance)
 (require 'zz-editing)
 (require 'zz-codestyle)
+(require 'zz-helm)
+(require 'zz-project)
 (require 'zz-elisp)
 (require 'zz-clojure)
 
