@@ -8,3 +8,8 @@ var/
 smex-items
 recentf
 projectile-bookmarks.eld
+# Compiled
+*.elc
+
+# Packaging
+.cask
