@@ -26,10 +26,46 @@
 
 (set-frame-font "Monaco-12" nil t)
 
-;; Use the moe theme, nice 👍
-(paradox-require 'moe-theme)
-(moe-theme-set-color 'purple)
-(moe-dark)
+(defun select-theme-moe ()
+  (interactive)
+  (paradox-require 'moe-theme)
+  (moe-theme-set-color 'purple)
+  (moe-dark))
+
+
+(defun select-theme-monokai ()
+  (interactive)
+  (paradox-require 'monokai-theme)
+  (load-theme 'monokai t))
+
+
+(defun select-theme-ample ()
+  (interactive)
+  (paradox-require 'ample-theme)
+  ;; (load-theme 'ample-flat t t)
+  (load-theme 'ample t))
+
+(defun select-theme-cyberpunk ()
+  (interactive)
+  (paradox-require 'cyberpunk-theme)
+  (load-theme 'cyberpunk t))
+
+(defun select-theme-molokai ()
+  (interactive)
+  (paradox-require 'molokai-theme)
+  (load-theme 'molokai t))
+
+(defun select-theme-alect ()
+  (interactive)
+  (paradox-require 'alect-themes)
+  (load-theme 'alect-dark t))
+
+;;(select-theme-ample)
+;;(select-theme-monokai)
+;;(select-theme-moe)
+(select-theme-cyberpunk)
+;;(select-theme-molokai)
+;;(select-theme-alect)
 
 ;; Show line numbers.
 (global-linum-mode t)
@@ -54,6 +90,9 @@
 (setq show-paren-style 'paren)
 
 (highlight-parentheses-mode 1)
+
+(paradox-require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 ;; Nyan Cat!
 (paradox-require 'nyan-mode)
