@@ -22,9 +22,13 @@
 (require 'zz-package)
 (require 'zz-appearance)
 (require 'zz-editing)
+(require 'zz-dired)
 (require 'zz-codestyle)
+(require 'zz-ido)
 (require 'zz-helm)
 (require 'zz-project)
+(require 'zz-navigation)
+
 (require 'zz-elisp)
 (require 'zz-clojure)
 

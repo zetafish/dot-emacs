@@ -36,6 +36,6 @@
               helm-recentf-fuzzy-match t
               helm-apropos-fuzzy-match t)
 
-(set-face-attribute 'helm-source-header nil :height 0.50)
+(set-face-attribute 'helm-source-header nil :height 0.80)
 
 (provide 'zz-helm)
