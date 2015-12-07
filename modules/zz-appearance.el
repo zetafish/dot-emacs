@@ -77,7 +77,6 @@
 (eval-after-load "rainbow-mode" '(diminish 'rainbow-mode))
 (eval-after-load "git-gutter" '(diminish 'git-gutter-mode))
 (eval-after-load "projectile" '(diminish 'projectile-mode))
-;;(eval-after-load "helm" '(diminish 'helm-mode))
 (eval-after-load "highlight-parentheses" '(diminish 'highlight-parentheses-mode))
 (eval-after-load "which-key" '(diminish 'which-key-mode))
 (eval-after-load "volatile-highlights" '(diminish 'volatile-highlights-mode))
