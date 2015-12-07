@@ -26,9 +26,9 @@
 
 (set-frame-font "Monaco-12" nil t)
 
-;; Use the moe theme, nice (-:
+;; Use the moe theme, nice 👍
 (paradox-require 'moe-theme)
-(moe-theme-set-color 'orange)
+(moe-theme-set-color 'green)
 (moe-dark)
 
 ;; Show line numbers.
