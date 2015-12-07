@@ -7,6 +7,7 @@
 (paradox-require 'paredit)
 
 (paradox-require 'flycheck-clojure)
+(paradox-require 'flycheck-pos-tip)
 
 (add-hook 'clojure-mode-hook
           (lambda ()
@@ -19,7 +20,13 @@
   ;;(define-key clojure-mode-map (kbd "C-x C-e"))
   (cljr-add-keybindings-with-prefix "C-c C-m"))
 
-(eval-after-load 'flycheck '(flycheck-clojure-setup))
+(with-eval-after-load "flycheck"
+  (flycheck-clojure-setup)
+  (setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
+
+;;(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages)
+
+;;(eval-after-load 'flycheck '(flycheck-clojure-setup))
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 (provide 'zz-clojure)

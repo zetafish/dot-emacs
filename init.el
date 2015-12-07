@@ -32,10 +32,12 @@
 (require 'zz-git)
 (require 'zz-snippets)
 (require 'zz-flycheck)
+(require 'zz-help)
 
 (require 'zz-elisp)
 (require 'zz-clojure)
 (require 'zz-python)
+(require 'zz-markdown)
 
 ;; Load the user's config file
 (load (concat dotfiles-dir "user.el") 'noerror)
