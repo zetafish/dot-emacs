@@ -28,9 +28,11 @@
 (require 'zz-helm)
 (require 'zz-project)
 (require 'zz-navigation)
+(require 'zz-git)
 
 (require 'zz-elisp)
 (require 'zz-clojure)
+(require 'zz-python)
 
 ;; Load the user's config file
 (load (concat dotfiles-dir "user.el") 'noerror)
