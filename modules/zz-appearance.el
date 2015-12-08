@@ -26,6 +26,13 @@
 
 (set-frame-font "Monaco-12" nil t)
 
+(defun apply-darkness ()
+  (interactive)
+  (set-face-background 'default "#000")
+  (set-face-background 'fringe "#000")
+  (set-face-background 'linum "#000")
+  (set-face-foreground 'linum "#444444"))
+
 (defun select-theme-moe ()
   (interactive)
   (paradox-require 'moe-theme)
@@ -39,14 +46,15 @@
 (defun select-theme-monokai ()
   (interactive)
   (paradox-require 'monokai-theme)
-  (load-theme 'monokai t))
-
+  (load-theme 'monokai t)
+  (set-face-foreground 'linum "#444444"))
 
 (defun select-theme-ample ()
   (interactive)
   (paradox-require 'ample-theme)
   ;; (load-theme 'ample-flat t t)
-  (load-theme 'ample t))
+  (load-theme 'ample t)
+  (set-face-foreground 'linum "#444444"))
 
 (defun select-theme-cyberpunk ()
   (interactive)
@@ -57,17 +65,20 @@
 (defun select-theme-molokai ()
   (interactive)
   (paradox-require 'molokai-theme)
-  (load-theme 'molokai t))
+  (load-theme 'molokai t)
+  (set-face-foreground 'linum "#444444"))
 
 (defun select-theme-alect ()
   (interactive)
   (paradox-require 'alect-themes)
-  (load-theme 'alect-dark t))
+  (load-theme 'alect-dark t)
+  (set-face-foreground 'linum "#444444"))
 
 (defun select-theme-noctilux ()
   (interactive)
   (paradox-require 'noctilux-theme)
-  (load-theme 'noctilux t))
+  (load-theme 'noctilux t)
+  (set-face-foreground 'linum "#444444"))
 
 ;;(select-theme-ample)
 ;;(select-theme-monokai)
