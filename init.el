@@ -62,3 +62,5 @@
 ;; Load the user's config file
 (load (concat dotfiles-dir "user.el") 'noerror)
 
+(toggle-debug-on-error t)
+(toggle-debug-on-quit t)
