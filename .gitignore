@@ -16,3 +16,5 @@ server/
 # Packaging
 .cask
 /ido.last
+/request/curl-cookie-jar
+/tramp

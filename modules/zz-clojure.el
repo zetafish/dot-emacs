@@ -23,18 +23,21 @@
 (paradox-require 'clojure-mode)
 
 (paradox-require 'clj-refactor)
-;;(require 'clj-refactor)
 
 (paradox-require 'paredit)
+
+(paradox-require 'eldoc)
 
 (paradox-require 'cider)
 
 (paradox-require 'flycheck-clojure)
+
 (paradox-require 'flycheck-pos-tip)
 
 (add-hook 'clojure-mode-hook
           (lambda ()
             (paredit-mode)
+            (eldoc-mode)
             (clj-refactor-mode 1)))
 
 

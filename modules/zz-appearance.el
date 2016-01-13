@@ -79,6 +79,7 @@
 (eval-after-load "which-key" '(diminish 'which-key-mode))
 (eval-after-load "volatile-highlights" '(diminish 'volatile-highlights-mode))
 (eval-after-load "flycheck" '(diminish 'flycheck-mode))
+(eval-after-load "highlight-indentation" '(diminish 'highlight-indentation-mode))
 
 (defun apply-darkness ()
   (interactive)
@@ -141,9 +142,9 @@
 ;;(select-theme-ample)
 ;;(select-theme-monokai)
 ;;(select-theme-moe)
-(select-theme-cyberpunk)
+;;(select-theme-cyberpunk)
 ;;(select-theme-molokai)
 ;;(select-theme-alect)
-
+(load-theme 'whiteboard t)
 
 (provide 'zz-appearance)
