@@ -41,12 +41,26 @@
             (clj-refactor-mode 1)))
 
 
+
 (with-eval-after-load "clojure-mode"
   ;;; Rebind C-x C-e to eval through nREPL in clojure-mode buffers.
   ;;(define-key clojure-mode-map (kbd "C-x C-e"))
   (cljr-add-keybindings-with-prefix "C-c C-m")
   (flycheck-clojure-setup))
 
+(eval-after-load 'clojure-mode
+  '(define-clojure-indent
+     ;; Core
+     (send-off 1) (cli 1) (go-loop 1)
+
+     ;;Compojure
+     (ANY 2) (GET 2) (POST 2) (PUT 2) (PATCH 2) (DELETE 2)
+     (OPTIONS 2)
+
+     ;; Korma
+     ;; (select 1) (insert 1) (update 1) (where 1) (set-fields 1)
+     ;; (values 1) (delete 1) (upsert 1) (subselect 1)
+     ))
 
 
 ;;(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages)

@@ -18,3 +18,4 @@ server/
 /ido.last
 /request/curl-cookie-jar
 /tramp
+/eshell/history

@@ -57,6 +57,7 @@
 (require 'zz-elisp)
 (require 'zz-clojure)
 (require 'zz-python)
+(require 'zz-javascript)
 (require 'zz-markdown)
 
 ;; Load the user's config file
@@ -64,3 +65,5 @@
 
 (toggle-debug-on-error nil)
 (toggle-debug-on-quit nil)
+
+(setq backup-directory-alist '(("." . "~/.saves")))

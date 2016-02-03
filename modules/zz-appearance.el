@@ -147,4 +147,6 @@
 ;;(select-theme-alect)
 (load-theme 'whiteboard t)
 
+(paradox-require 'switch-window)
+
 (provide 'zz-appearance)
