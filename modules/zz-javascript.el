@@ -20,13 +20,16 @@
 
 ;;; Code:
 
-(add-to-list 'exec-path "/Users/endymion/.nvm/versions/node/v5.1.0/bin")
+(setq node-path  "/Users/endymion/.nvm/versions/node/v5.1.0/bin")
+(setenv "PATH" (concat (getenv "PATH") ":" node-path))
+(add-to-list 'exec-path node-path)
 
 
 (paradox-require 'js2-mode)
 (paradox-require 'js2-refactor)
 (paradox-require 'flymake-jshint)
 (paradox-require 'ac-js2)
+(paradox-require 'tern)
 ;;(paradox-require 'jscs)
 
 (add-hook 'js-mode-hook 'js2-minor-mode)
@@ -36,10 +39,28 @@
 (add-hook 'js2-mode-hook #'jscs-indent-apply)
 (add-hook 'json-mode-hook #'jscs-indent-apply)
 
+(add-hook 'js-mode-hook (lambda () (tern-mode t)))
 
 (setq js2-highlight-level 3)
 (setq js-indent-level 4)
 
+(flycheck-define-checker javascript-jscs
+  "A JavaScript style checker using jscs.
+
+See URL `https://www.npmjs.com/package/jscs'."
+  :command ("jscs" "--reporter=checkstyle"
+            (config-file "--config" flycheck-jscsrc)
+            source)
+  :error-parser flycheck-parse-checkstyle
+  :modes (js-mode js2-mode js3-mode))
+
+(flycheck-def-config-file-var flycheck-jscsrc javascript-jscs ".jscsrc"
+  :safe #'stringp)
+
+(add-hook 'html-mode-hook
+          (lambda ()
+            ;; Default indentation is 2 spaces, we want 4 spaces-string
+            (set (make-local-variable 'sgml-basic-offset) 4)))
 
 (provide 'zz-javascript)
 ;;; zz-javascript ends here
