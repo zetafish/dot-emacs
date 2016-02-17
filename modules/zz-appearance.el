@@ -48,6 +48,7 @@
 (show-paren-mode 1)
 (setq show-paren-style 'paren)
 
+(paradox-require 'highlight-parentheses)
 (highlight-parentheses-mode 1)
 
 (paradox-require 'rainbow-delimiters)
