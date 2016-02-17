@@ -82,25 +82,26 @@
 (eval-after-load "highlight-indentation" '(diminish 'highlight-indentation-mode))
 
 ;; Load a bunch of themes
-(paradox-require 'moe-theme)
-(paradox-require 'monokai-theme)
-(paradox-require 'ample-theme)
-(paradox-require 'cyberpunk-theme)
-(paradox-require 'molokai-theme)
-(paradox-require 'alect-themes)
-(paradox-require 'moe-theme)
-(paradox-require 'noctilux-theme)
+;; (paradox-require 'moe-theme)
+;; (paradox-require 'monokai-theme)
+;; (paradox-require 'ample-theme)
+;; (paradox-require 'cyberpunk-theme)
+;; (paradox-require 'molokai-theme)
+;; (paradox-require 'alect-themes)
+;; (paradox-require 'moe-theme)
+;; (paradox-require 'noctilux-theme)
+;; (paradox-require 'gotham-theme)
+
+;; (defun apply-darkness ()
+;;   (interactive)
+;;   (set-face-background 'default "#000")
+;;   (set-face-background 'fringe "#000")
+;;   (set-face-background 'linum "#000")
+;;   (set-face-foreground 'linum "#444444"))
 
 
-(defun apply-darkness ()
-  (interactive)
-  (set-face-background 'default "#000")
-  (set-face-background 'fringe "#000")
-  (set-face-background 'linum "#000")
-  (set-face-foreground 'linum "#444444"))
 
-
-(load-theme 'ample-flat t)
+;;(load-theme 'ample-flat t)
 ;;(load-theme 'ample t)
 ;;(moe-dark)
 ;;(moe-light)
@@ -111,6 +112,9 @@
 ;;(load-theme 'leuven t)
 ;;(load-theme 'abyss t)
 ;;(load-theme 'cyberpunk t)
+;;(load-theme 'noctilux t)
+;;(load-theme 'leuven t)
+(load-theme 'gotham t)
 
 (paradox-require 'switch-window)
 

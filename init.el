@@ -53,6 +53,7 @@
 (require 'zz-snippets)
 (require 'zz-flycheck)
 (require 'zz-help)
+(require 'zz-org)
 
 (require 'zz-elisp)
 (require 'zz-clojure)
@@ -63,7 +64,7 @@
 ;; Load the user's config file
 (load (concat dotfiles-dir "user.el") 'noerror)
 
-(toggle-debug-on-error nil)
-(toggle-debug-on-quit nil)
+;;(toggle-debug-on-error nil)
+;;(toggle-debug-on-quit nil)
 
 (setq backup-directory-alist '(("." . "~/.saves")))

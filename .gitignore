@@ -9,6 +9,7 @@ smex-items
 recentf
 projectile-bookmarks.eld
 server/
+custom.el
 
 # Compiled
 *.elc
