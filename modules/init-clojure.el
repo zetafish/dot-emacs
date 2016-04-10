@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; zz-clojure.el -- Clojure development
+;;; init-clojure.el -- Clojure development
 
 ;; Copyright (C) 2015 Endymion Kasanardjo
 
@@ -68,5 +68,5 @@
 ;;(eval-after-load 'flycheck '(flycheck-clojure-setup))
 ;;(add-hook 'after-init-hook #'global-flycheck-mode)
 
-(provide 'zz-clojure)
-;;; zz-clojure.el ends here
+(provide 'init-clojure)
+;;; init-clojure.el ends here

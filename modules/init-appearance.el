@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; zz-appearance.el
+;;; init-appearance.el
 
 ;; Copyright (C) 2015 Endymion Kasanardjo
 
@@ -119,4 +119,4 @@
 
 (paradox-require 'switch-window)
 
-(provide 'zz-appearance)
+(provide 'init-appearance)

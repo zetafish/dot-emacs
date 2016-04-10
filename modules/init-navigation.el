@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; zz-navigation.el -- Navigating
+;;; init-navigation.el -- Navigating
 
 ;; Copyright (C) 2015 Endymion Kasanardjo
 
@@ -50,4 +50,4 @@
 (global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
 
 
-(provide 'zz-navigation)
+(provide 'init-navigation)

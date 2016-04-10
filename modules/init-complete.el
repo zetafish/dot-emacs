@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; zz-complete.el -- Completions
+;;; init-complete.el -- Completions
 
 ;; Copyright (C) 2015 Endymion Kasanardjo
 
@@ -56,4 +56,4 @@
 (define-key company-active-map (kbd "C-\\") #'company-try-hard)
 
 
-(provide 'zz-complete)
+(provide 'init-complete)

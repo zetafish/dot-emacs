@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; zz-editing.el -- General editing
+;;; init-snippets.el -- Code snippets
 
 ;; Copyright (C) 2015 Endymion Kasanardjo
 
@@ -18,28 +18,12 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-;; Multiple cursors!
-(paradox-require 'multiple-cursors)
+;; s.el package has useful functions
+(paradox-require 's)
+(require 's)
 
-;; Remap join-line to M-j
-(global-set-key (kbd "M-j") 'join-line)
+(paradox-require 'yasnippet)
+(require 'yasnippet)
+(yas-global-mode 1)
 
-;; Hit C-c <tab> to auto-indet the enitre buffer.
-(defun indent-buffer ()
-  (interactive)
-  (indent-region (point-min) (point-max)))
-(global-set-key (kbd "C-c <tab>") 'indent-buffer)
-
-;; Automatically insert matchin braces.
-(electric-pair-mode 1)
-
-;; Shrink whitespace
-(paradox-require 'shrink-whitespace)
-(global-set-key (kbd "C-c DEL") 'shrink-whitespace)
-
-;; Highlight changed areas.
-(paradox-require 'volatile-highlights)
-(volatile-highlights-mode t)
-
-
-(provide 'zz-editing)
+(provide 'init-snippets)

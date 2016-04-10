@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; zz-package.el -- Package management
+;;; init-codestyle.el -- Code style
 
 ;; Copyright (C) 2015 Endymion Kasanardjo
 
@@ -18,21 +18,32 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-;; Emacs comes with a package manager for installing more features.
-;; The default pacakge repository doesn't contain much, so we tell it
-;; to use MELPA as well.
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("elpy" . "http://jorgenschaefer.github.io/packages/") t)
+;; No tabs.
+(set-default 'indent-tabs-mode nil)
 
-;; To get the package manager going, invoke its initialise function.
-(package-initialize)
+;; No double spaces.
+(setq sentence-end-double-space nil)
 
-(unless package-archive-contents (package-refresh-contents))
+;; Always indent after a new line.
+(define-key global-map (kbd "RET") 'newline-and-indent)
 
-;; `Paradox' is an enhanced interface for package management.
-(when (not (package-installed-p 'paradox))
-  (package-install 'paradox))
+;; Strict whitespace.
+(paradox-require 'ethan-wspace)
+(setq mode-require-final-newline nil)
+(setq require-final-newline nil)
+(global-ethan-wspace-mode 1)
+(global-set-key (kbd "C-c c") 'ethan-wspace-clean-all)
 
+;; Set default indentations for various languages
+(setq-default tab-width 4)
 
-(provide 'zz-package)
+;; JSON
+(setq-default js-indent-level 2)
+
+;; Python
+(setq-default py-indent-offset 4)
+
+;; XML
+(setq-default nxml-child-indent 2)
+
+(provide 'init-codestyle)

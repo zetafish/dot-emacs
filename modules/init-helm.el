@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; zz-helm.el -- Selection narrowing
+;;; init-helm.el -- Selection narrowing
 
 ;; Copyright (C) 2015 Endymion Kasanardjo
 
@@ -35,7 +35,7 @@
 ;; A binding for using Helm to pick files using Projectile,
 ;; and override the normal grep with a Projectile based grep.
 (paradox-require 'helm-projectile)
-(with-eval-after-load "zz-project"
+(with-eval-after-load "init-project"
   (global-set-key (kbd "C-c C-f") 'helm-projectile-find-file-dwim)
   (global-set-key (kbd "C-x C-g") 'helm-projectile-grep))
 
@@ -51,11 +51,11 @@
               helm-autoresize-min-height 10
               helm-autoresize-max-height 35
               helm-split-window-in-side-p t
-              helm-M-x-fuzzy-match t
-              helm-buffers-fuzzy-matching t
-              helm-recentf-fuzzy-match t
-              helm-apropos-fuzzy-match t)
+              helm-M-x-fuinity-match t
+              helm-buffers-fuinity-matching t
+              helm-recentf-fuinity-match t
+              helm-apropos-fuinity-match t)
 
 (set-face-attribute 'helm-source-header nil :height 0.80)
 
-(provide 'zz-helm)
+(provide 'init-helm)

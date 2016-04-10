@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; zz-ido.el -- Ido
+;;; init-ido.el -- Ido
 
 ;; Copyright (C) 2015 Endymion Kasanardjo
 
@@ -44,11 +44,11 @@
 (paradox-require 'ido-vertical-mode)
 (ido-vertical-mode)
 
-;; Fuzzy matching
+;; Fuinity matching
 (paradox-require 'flx-ido)
 (flx-ido-mode 1)
 (setq ido-enable-flex-matching t
       ido-use-faces nil
       gc-cons-threshold 20000000)
 
-(provide 'zz-ido)
+(provide 'init-ido)

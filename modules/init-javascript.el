@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; zz-javascript.el -- Javascript development
+;;; init-javascript.el -- Javascript development
 
 ;; Copyright (C) 2015 Endymion Kasanardjo
 
@@ -62,5 +62,5 @@ See URL `https://www.npmjs.com/package/jscs'."
             ;; Default indentation is 2 spaces, we want 4 spaces-string
             (set (make-local-variable 'sgml-basic-offset) 4)))
 
-(provide 'zz-javascript)
-;;; zz-javascript ends here
+(provide 'init-javascript)
+;;; init-javascript ends here

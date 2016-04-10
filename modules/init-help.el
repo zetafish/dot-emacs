@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; zz-markdown.el -- Markdown development
+;;; init-help.el -- Help
 
 ;; Copyright (C) 2015 Endymion Kasanardjo
 
@@ -18,8 +18,17 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-(paradox-require 'markdown-mode)
-(add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+(paradox-require 'which-key)
+(which-key-mode)
 
-(provide 'zz-markdown)
+;; Hit C-h C-k to have which key show top level bindings
+(global-set-key (kbd "C-h C-k") 'which-key-show-top-level)
+
+;; Set the delay before which-key appears.
+(setq-default which-key-idle-delay 2.0)
+
+;; Get cheat sheet with C-h C-m
+(paradox-require 'discover-my-major)
+(global-set-key (kbd "C-h C-m") 'discover-my-major)
+
+(provide 'init-help)

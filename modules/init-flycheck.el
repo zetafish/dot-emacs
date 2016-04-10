@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; zz-snippets.el -- Code snippets
+;;; init-flycheck.el -- Flycheck
 
 ;; Copyright (C) 2015 Endymion Kasanardjo
 
@@ -18,12 +18,27 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-;; s.el package has useful functions
-(paradox-require 's)
-(require 's)
+(paradox-require 'flycheck)
 
-(paradox-require 'yasnippet)
-(require 'yasnippet)
-(yas-global-mode 1)
+;; Start it automatically except Elisp.
+(add-hook 'find-file-hook
+          (lambda ()
+            (when (not (equal 'emacs-lisp-mode major-mode))
+              (flycheck-mode))))
 
-(provide 'zz-snippets)
+;; Jump between current errors with M-n and M-p
+(global-set-key (kbd "M-n") 'next-error)
+(global-set-key (kbd "M-p") 'previous-error)
+
+;; Turn the modeline red when Flycheck has errors.
+(paradox-require 'flycheck-color-mode-line)
+
+;; Configure the theme
+(with-eval-after-load "flycheck"
+  (setq flycheck-highlighting-mode 'symbols)
+  (setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages)
+  (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
+
+
+
+(provide 'init-flycheck)

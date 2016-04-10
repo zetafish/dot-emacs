@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; zz-elisp.el -- Emacs Lisp
+;;; init-elisp.el -- Emacs Lisp
 
 ;; Copyright (C) 2015 Endymion Kasanardjo
 
@@ -36,4 +36,4 @@
 ;; Setup M-. to jump to the definition of the symbol under the cursor.
 (define-key emacs-lisp-mode-map (kbd "M-.") 'find-function-at-point)
 
-(provide 'zz-elisp)
+(provide 'init-elisp)

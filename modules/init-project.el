@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; zz-org.el
+;;; init-project.el -- Project management
 
 ;; Copyright (C) 2015 Endymion Kasanardjo
 
@@ -18,14 +18,10 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-(setq org-todo-keywords
-      '((sequence "TODO" "IN PROGRESS" "DONE")))
+(paradox-require 'projectile)
+(projectile-global-mode)
 
+;; Use C-c C-f to find a file anywhere in the current project.
+(global-set-key (kbd "C-c C-f") 'projectile-find-file)
 
-(setq org-use-fast-todo-selection t)
-(setq org-treat-S-cursor-todo-selection-as-state-change nil)
-(setq org-clock-persist 'history)
-
-(org-clock-persistence-insinuate)
-
-(provide 'zz-org)
+(provide 'init-project)

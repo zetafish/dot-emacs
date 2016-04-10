@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; zz-python.el -- Python development
+;;; init-git.el -- Git porcelain
 
 ;; Copyright (C) 2015 Endymion Kasanardjo
 
@@ -18,9 +18,19 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-(paradox-require 'python-mode)
+(paradox-require 'magit)
+(global-set-key (kbd "C-x g") 'magit-status)
 
-(paradox-require 'elpy)
-(elpy-enable)
+(paradox-require 'gist)
 
-(provide 'zz-python)
+;; Mark uncommitted changes in the fringe.
+(paradox-require 'git-gutter-fringe)
+(require 'git-gutter-fringe)
+(global-git-gutter-mode t)
+
+(set-face-foreground 'git-gutter-fr:modified "red")
+(set-face-foreground 'git-gutter-fr:added "magenta")
+(set-face-foreground 'git-gutter-fr:deleted "white")
+(setq git-gutter-fr:side 'left-fringe)
+
+(provide 'init-git)

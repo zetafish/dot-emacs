@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; zz-dired.el -- Directory editing
+;;; init-editing.el -- General editing
 
 ;; Copyright (C) 2015 Endymion Kasanardjo
 
@@ -18,17 +18,28 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-;; dired+ is an enhanced version of the built-in Emacs directory editor.
-(paradox-require 'dired+)
-(setq diredp-hide-details-initially-flag nil)
-(require 'dired+)
-(set-face-foreground 'diredp-file-name nil)
+;; Multiple cursors!
+(paradox-require 'multiple-cursors)
 
-;; Keep dired buffers updated when the file system changes.
-(setq global-auto-revert-non-file-buffers t)
-(setq auto-revert-verbose nil)
+;; Remap join-line to M-j
+(global-set-key (kbd "M-j") 'join-line)
 
-;; TODO (defun delete-current-buffer-file () ...)
-;; TODO (defun rename-current-buffer-file () ...)
+;; Hit C-c <tab> to auto-indet the enitre buffer.
+(defun indent-buffer ()
+  (interactive)
+  (indent-region (point-min) (point-max)))
+(global-set-key (kbd "C-c <tab>") 'indent-buffer)
 
-(provide 'zz-dired)
+;; Automatically insert matchin braces.
+(electric-pair-mode 1)
+
+;; Shrink whitespace
+(paradox-require 'shrink-whitespace)
+(global-set-key (kbd "C-c DEL") 'shrink-whitespace)
+
+;; Highlight changed areas.
+(paradox-require 'volatile-highlights)
+(volatile-highlights-mode t)
+
+
+(provide 'init-editing)

@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; zz-git.el -- Git porcelain
+;;; init-dired.el -- Directory editing
 
 ;; Copyright (C) 2015 Endymion Kasanardjo
 
@@ -18,19 +18,17 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-(paradox-require 'magit)
-(global-set-key (kbd "C-x g") 'magit-status)
+;; dired+ is an enhanced version of the built-in Emacs directory editor.
+(paradox-require 'dired+)
+(setq diredp-hide-details-initially-flag nil)
+(require 'dired+)
+(set-face-foreground 'diredp-file-name nil)
 
-(paradox-require 'gist)
+;; Keep dired buffers updated when the file system changes.
+(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)
 
-;; Mark uncommitted changes in the fringe.
-(paradox-require 'git-gutter-fringe)
-(require 'git-gutter-fringe)
-(global-git-gutter-mode t)
+;; TODO (defun delete-current-buffer-file () ...)
+;; TODO (defun rename-current-buffer-file () ...)
 
-(set-face-foreground 'git-gutter-fr:modified "red")
-(set-face-foreground 'git-gutter-fr:added "magenta")
-(set-face-foreground 'git-gutter-fr:deleted "white")
-(setq git-gutter-fr:side 'left-fringe)
-
-(provide 'zz-git)
+(provide 'init-dired)

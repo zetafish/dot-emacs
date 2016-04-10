@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; zz-help.el -- Help
+;;; init-package.el -- Package management
 
 ;; Copyright (C) 2015 Endymion Kasanardjo
 
@@ -18,17 +18,21 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-(paradox-require 'which-key)
-(which-key-mode)
+;; Emacs comes with a package manager for installing more features.
+;; The default pacakge repository doesn't contain much, so we tell it
+;; to use MELPA as well.
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("elpy" . "http://jorgenschaefer.github.io/packages/") t)
 
-;; Hit C-h C-k to have which key show top level bindings
-(global-set-key (kbd "C-h C-k") 'which-key-show-top-level)
+;; To get the package manager going, invoke its initialise function.
+(package-initialize)
 
-;; Set the delay before which-key appears.
-(setq-default which-key-idle-delay 2.0)
+(unless package-archive-contents (package-refresh-contents))
 
-;; Get cheat sheet with C-h C-m
-(paradox-require 'discover-my-major)
-(global-set-key (kbd "C-h C-m") 'discover-my-major)
+;; `Paradox' is an enhanced interface for package management.
+(when (not (package-installed-p 'paradox))
+  (package-install 'paradox))
 
-(provide 'zz-help)
+
+(provide 'init-package)
