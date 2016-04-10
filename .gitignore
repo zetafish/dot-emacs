@@ -20,3 +20,5 @@ custom.el
 /request/curl-cookie-jar
 /tramp
 /eshell/history
+emojis/
+eshell/
