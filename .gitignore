@@ -10,6 +10,7 @@ recentf
 projectile-bookmarks.eld
 server/
 custom.el
+eshell/
 
 # Compiled
 *.elc
