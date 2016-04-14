@@ -21,8 +21,9 @@
 
 ;; Appearance
 (menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+(when window-system
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1))
 
 (set-frame-font "Monaco-12" nil t)
 
@@ -115,7 +116,7 @@
 ;;(load-theme 'cyberpunk t)
 ;;(load-theme 'noctilux t)
 ;;(load-theme 'leuven t)
-(load-theme 'gotham t)
+;;(load-theme 'gotham t)
 
 (paradox-require 'switch-window)
 
