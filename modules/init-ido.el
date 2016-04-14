@@ -44,7 +44,7 @@
 (paradox-require 'ido-vertical-mode)
 (ido-vertical-mode)
 
-;; Fuinity matching
+;; Fuzzy matching
 (paradox-require 'flx-ido)
 (flx-ido-mode 1)
 (setq ido-enable-flex-matching t
