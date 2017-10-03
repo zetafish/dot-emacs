@@ -1,0 +1,5 @@
+network-security.data
+*~
+.mc-lists.el
+elpa/
+auto-save-list/
