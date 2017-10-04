@@ -34,5 +34,9 @@
   :diminish highlight-parentheses-mode)
 
 (require 'zf-appearance)
+(require 'zf-editing)
 (require 'zf-completion)
 (require 'zf-helm)
+
+;; Programming
+(require 'zf-clojure)

@@ -13,6 +13,8 @@
   (use-package grandshell-theme)
   (load-theme 'grandshell))
 
+(zf-appearance/nice)
+
 (global-linum-mode t)
 (setq linum-format "%4d")
 
