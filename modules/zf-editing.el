@@ -26,7 +26,11 @@
 (defun indent-buffer ()
   (interactive)
   (indent-region (point-min) (point-max)))
+
 (global-set-key (kbd "C-c <tab>") 'indent-buffer)
+
+;; Join line
+(global-set-key (kbd "M-j") 'join-line)
 
 ;; Highlight areas with certain operations, such as undo, kill, yank.
 (use-package volatile-highlights
