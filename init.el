@@ -1,4 +1,4 @@
-(package-initialize)
+1(package-initialize)
 
 (setq inhibit-splash-screen t)
 
@@ -7,7 +7,7 @@
 (scroll-bar-mode -1)
 
 ;;(set-frame-font "Fira Mono-13" nil t)
-(set-frame-font "Monaco-13" nil t)
+(set-frame-font "Monaco" nil t)
 
 (setq dotfiles-dir user-emacs-directory)
 
@@ -24,3 +24,5 @@
 (require 'zf-editing)
 (require 'zf-codestyle)
 (require 'zf-elisp)
+(require 'zf-python)
+(require 'zf-clojure)

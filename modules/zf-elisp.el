@@ -1,4 +1,5 @@
 (use-package paredit
+  :demand t
   :commands paredit-mode
   :config
   (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)

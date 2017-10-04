@@ -19,7 +19,7 @@
   (set-face-attribute 'helm-source-header nil :height 0.75)
 
   :bind (("M-x" . helm-M-x)
-	 ("C-c C-f" . helm-find-files)
+	 ("C-x C-f" . helm-find-files)
 	 ("C-x C-g" . helm-do-grep)
 	 ("C-x b" . helm-buffers-list)
 	 ("C-x c g" . helm-google-suggest)
