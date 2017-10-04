@@ -1,0 +1,1 @@
+(provide 'zf-global)

@@ -28,4 +28,11 @@
   (indent-region (point-min) (point-max)))
 (global-set-key (kbd "C-c <tab>") 'indent-buffer)
 
+;; Highlight areas with certain operations, such as undo, kill, yank.
+(use-package volatile-highlights
+  :commands volatile-highlights-mode
+  :config
+  (volatile-highlights-mode t)
+  :diminish volatile-highlights-mode)
+
 (provide 'zf-editing)

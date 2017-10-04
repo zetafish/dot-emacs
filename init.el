@@ -1,42 +1,26 @@
-(require 'package)
-(setq package-enable-at-startup nil)
-
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (package-initialize)
 
-(unless (package-installed-p 'paradox)
-  (package-install 'paradox))
+(setq inhibit-splash-screen t)
 
-(paradox-require 'use-package)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
 
-(require 'use-package)
+;;(set-frame-font "Fira Mono-13" nil t)
+(set-frame-font "Monaco-13" nil t)
 
-;; Enable use-package-always-enusre makes use-package install every
-;; declared package automatically instead of doing it manually.
-(setq use-package-always-ensure t)
+(setq dotfiles-dir user-emacs-directory)
 
-(setq dotfiles-dir "~/.emacs.d/")
+(setq custom-file (expand-file-name "custom.el" dotfiles-dir))
+(load custom-file 'noerror)
 
-(add-to-list 'load-path (concat dotfiles-dir "modules"))
+(add-to-list 'load-path (expand-file-name "modules" dotfiles-dir))
 
-;; Elisp
-(use-package paredit
-  :commands paredit-mode
-  :config (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
-  :diminish paredit-mode)
-
-(use-package highlight-parentheses
-  :commands highlight-parentheses-mode
-  :config
-  (add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
-  :diminish highlight-parentheses-mode)
-
+(require 'zf-packages)
 (require 'zf-appearance)
-(require 'zf-editing)
 (require 'zf-completion)
+(require 'zf-git)
 (require 'zf-helm)
-
-;; Programming
-(require 'zf-clojure)
+(require 'zf-editing)
+(require 'zf-codestyle)
+(require 'zf-elisp)

@@ -24,7 +24,9 @@
 	 ("C-x b" . helm-buffers-list)
 	 ("C-x c g" . helm-google-suggest)
 	 ("C-t" . helm-imenu)
-	 ("M-y" . helm-show-kill-ring)))
+	 ("M-y" . helm-show-kill-ring))
+
+  :diminish helm-mode)
 
 (use-package swiper-helm
   :bind (("C-S-s" . swiper-helm)))

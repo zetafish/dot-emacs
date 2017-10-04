@@ -13,10 +13,17 @@
   (use-package grandshell-theme)
   (load-theme 'grandshell))
 
+(when window-system
+  (setq frame-title-format '(buffer-file-name "%f" ("%b")))
+  (tooltip-mode -1)
+  (mouse-wheel-mode t)
+  (blink-cursor-mode -1))
+
+
 (zf-appearance/nice)
 
 (global-linum-mode t)
-(setq linum-format "%4d")
+(setq linum-format "%4d ")
 
 (use-package hlinum
   :config
@@ -28,12 +35,22 @@
 ;; Show current function in modeline.
 (which-function-mode)
 
+;; Show time in modeline
+(display-time)
+
+;; Show battery mode in the modeline
+(display-battery-mode)
+
 ;; Disable linum-mode in certain major modes
 (setq linum-disabled-modes
       '(term-mode magit-status-mode help-mode nrepl-mode))
 
 ;; Hightlight matching braces
 (show-paren-mode 1)
+
+(use-package highlight-parentheses
+  :config
+  (highlight-parentheses-mode 1))
 
 ;; Nyan Cat!
 (use-package nyan-mode
@@ -43,5 +60,7 @@
 	nyan-wavy-trail t))
 
 (use-package diminish)
+
+(eval-after-load "eldoc" '(diminish 'eldoc-mode))
 
 (provide 'zf-appearance)
