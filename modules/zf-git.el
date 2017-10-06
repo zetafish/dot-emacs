@@ -1,3 +1,8 @@
+;;; zf-get --- Git
+
+;;; Commentary:
+
+;;; Code:
 (use-package magit
   :commands magit-status
   :bind (("C-x g" . magit-status)))
@@ -10,3 +15,4 @@
   :diminish git-gutter-mode)
 
 (provide 'zf-git)
+;;; zf-git ends here

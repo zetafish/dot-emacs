@@ -1,3 +1,9 @@
+;;; zf-helm --- Helm
+
+;;; Commentary:
+
+;;; Code:
+
 (use-package helm
   :config
   (require 'helm-config)
@@ -6,25 +12,25 @@
   (with-eval-after-load "zf-project"
     (use-package helm-projectile
       :bind (("C-c C-f" . helm-projectile-find-file-dwim)
-	     ("C-x C-g" . helm-projectile-grep))
+             ("C-x C-g" . helm-projectile-grep))
       :config (helm-projectile-on)))
   (setq-default helm-display-header-line nil
-		helm-autoresize-min-height 10
-		helm-autoresize-max-height 35
-		helm-split-window-in-side-p t
-		helm-M-x-fuzzy-match t
-		helm-buffer-fuzzy-matching t
-		helm-recentf-fuzzy-match t
-		helm-apropos-fuzzy-match t)
+                helm-autoresize-min-height 10
+                helm-autoresize-max-height 35
+                helm-split-window-in-side-p t
+                helm-M-x-fuzzy-match t
+                helm-buffer-fuzzy-matching t
+                helm-recentf-fuzzy-match t
+                helm-apropos-fuzzy-match t)
   (set-face-attribute 'helm-source-header nil :height 0.75)
 
   :bind (("M-x" . helm-M-x)
-	 ("C-x C-f" . helm-find-files)
-	 ("C-x C-g" . helm-do-grep)
-	 ("C-x b" . helm-buffers-list)
-	 ("C-x c g" . helm-google-suggest)
-	 ("C-t" . helm-imenu)
-	 ("M-y" . helm-show-kill-ring))
+         ("C-x C-f" . helm-find-files)
+         ("C-x C-g" . helm-do-grep)
+         ("C-x b" . helm-buffers-list)
+         ("C-x c g" . helm-google-suggest)
+         ("C-t" . helm-imenu)
+         ("M-y" . helm-show-kill-ring))
 
   :diminish helm-mode)
 
@@ -45,3 +51,4 @@
   (helm-ext-ff-enable-auto-path-expansion t))
 
 (provide 'zf-helm)
+;;; zf-helm ends here

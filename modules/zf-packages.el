@@ -1,3 +1,9 @@
+;;; zf-packages --- Packages
+
+;;; Commentary:
+
+;;; Code:
+
 (require 'package)
 
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
@@ -15,3 +21,4 @@
 (setq use-package-always-ensure t)
 
 (provide 'zf-packages)
+;;; zf-packages ends here

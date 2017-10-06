@@ -9,7 +9,8 @@
     ("0b6cb9b19138f9a859ad1b7f753958d8a36a464c6d10550119b2838cedf92171" default)))
  '(package-selected-packages
    (quote
-    (flycheck-pos-tip flycheck-clojure clj-refactor company-jedi jedi volatile-highlights use-package swiper-helm smex paredit paradox nyan-mode multiple-cursors magit ido-vertical-mode ido-ubiquitous hlinum highlight-parentheses helm-flx helm-ext grandshell-theme git-gutter-fringe gist flx-ido expand-region ethan-wspace eros company-try-hard company-quickhelp company-emoji))))
+    (plantuml-mode elpy yaml-mode yaml transpose-frame flycheck-pos-tip flycheck-clojure clj-refactor company-jedi jedi volatile-highlights use-package swiper-helm smex paredit paradox nyan-mode multiple-cursors magit ido-vertical-mode ido-ubiquitous hlinum highlight-parentheses helm-flx helm-ext grandshell-theme git-gutter-fringe gist flx-ido expand-region ethan-wspace eros company-try-hard company-quickhelp company-emoji)))
+ '(plantuml-jar-path "/Users/endymion/bin/plantuml.jar"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

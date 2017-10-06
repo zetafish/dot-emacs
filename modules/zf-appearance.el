@@ -1,14 +1,23 @@
+;;; zf-appearance --- Appearance
+
+;;; Commentary:
+
+;;; Code:
+
 (defun zf-appearance/dark ()
+  "Set dark theme."
   (interactive)
   (use-package material-theme)
   (load-theme 'material))
 
 (defun zf-appearance/light ()
+  "Set light theme."
   (interactive)
   (use-package material-theme)
   (load-theme 'material-light))
 
 (defun zf-appearance/nice ()
+  "Set nice theme."
   (interactive)
   (use-package grandshell-theme)
   (load-theme 'grandshell))
@@ -57,10 +66,13 @@
   :config
   (nyan-mode 1)
   (setq nyan-bar-length 16
-	nyan-wavy-trail t))
+        nyan-wavy-trail t))
+
+(use-package transpose-frame)
 
 (use-package diminish)
 
 (eval-after-load "eldoc" '(diminish 'eldoc-mode))
 
 (provide 'zf-appearance)
+;;; zf-appearance ends here

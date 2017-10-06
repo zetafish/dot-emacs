@@ -1,3 +1,9 @@
+;;; zf-ido --- Ido
+
+;;; Commentary:
+
+;;; Code:
+
 ;; Enable ido mode
 (ido-mode t)
 (ido-everywhere t)
@@ -34,3 +40,6 @@
   (flx-ido-mode 1)
   (setq ido-enable-flex-matching t
         ido-use-faces nil))
+
+(provide 'zf-ido)
+;;; zf-ido ends here

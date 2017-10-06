@@ -1,3 +1,9 @@
+;;; zf-clojure --- Clojure development
+
+;;; Commentary:
+
+;;; Code:
+
 (use-package clj-refactor
   :commands clj-refactor-mode
   :config
@@ -29,3 +35,4 @@
      (clj-refactor-mode 1))))
 
 (provide 'zf-clojure)
+;;; zf-clojure ends here

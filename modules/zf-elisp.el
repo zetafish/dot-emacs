@@ -1,3 +1,9 @@
+;;; zf-elisp --- ELisp development
+
+;;; Commentary:
+
+;;; Code:
+
 (use-package paredit
   :demand t
   :commands paredit-mode
@@ -21,3 +27,4 @@
   (add-hook 'emacs-lisp-mode-hook 'eros-mode))
 
 (provide 'zf-elisp)
+;;; zf-elisp ends here

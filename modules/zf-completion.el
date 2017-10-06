@@ -1,3 +1,9 @@
+;;; zf-completion --- Completion
+
+;;; Commentary:
+
+;;; Code:
+
 (use-package company
   :demand t
   :commands company-mode
@@ -40,3 +46,4 @@
   (company-emoji-init))
 
 (provide 'zf-completion)
+;;; zf-completion ends here

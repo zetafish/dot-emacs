@@ -1,13 +1,11 @@
-;; (use-package jedi
-;;   :ensure t
-;;   :init
-;;   (add-hook 'python-mode-hook 'jedi:setup)
-;;   (add-hook 'python-mode-hook 'jedi:ac-setup))
+;;; zf-python.el -- Python development
 
+;;; Commentary:
+;; Copyright (C) 2017 Endymion Kasanardjo
+;; Author: Endymion Kasanardjo <zetafish@gmail.com>
 
-;;(use-package jedi)
+;;; Code:
 
-;;; company-mode completion back-end for Python JEDI
 (use-package company-jedi
   :config
   ;;(setq jedi:environment-virtualenv (list (expand-file-name "~/.emacs.d/.venv/")))
@@ -18,4 +16,12 @@
     (add-to-list 'company-backends 'company-jedi))
   (add-hook 'python-mode-hook 'config/enable-company-jedi))
 
+(use-package elpy)
+
+(use-package python)
+
+(use-package yaml-mode)
+
 (provide 'zf-python)
+
+;;; zf-python ends here

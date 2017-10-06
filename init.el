@@ -1,3 +1,7 @@
+;;; init.el --- Init file
+
+;;; Commentary:
+;;; Code:
 1(package-initialize)
 
 (setq inhibit-splash-screen t)
@@ -26,3 +30,4 @@
 (require 'zf-elisp)
 (require 'zf-python)
 (require 'zf-clojure)
+;;; init.el ends here

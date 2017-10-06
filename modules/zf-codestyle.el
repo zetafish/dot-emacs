@@ -1,3 +1,9 @@
+;;; zf-codestyle --- Code style
+
+;;; Commentary:
+
+;;; Code:
+
 ;; Turn of tabs
 (set-default 'indent-tabs-mode nil)
 
@@ -20,12 +26,13 @@
 (setq-default tab-width 2)
 
 ;; Javascript
-(setq-default js2-indent-level 2)
+(setq-default js2-indent-level 4)
 
 ;; JSON
-(setq-default js-indent-level 2)
+(setq-default js-indent-level 4)
 
 ;; Python
 (setq-default py-indent-offset 2)
 
 (provide 'zf-codestyle)
+;;; zf-codestyle ends here

@@ -1,3 +1,9 @@
+;;; zf-editing --- Editing
+
+;;; Commentary:
+
+;;; Code:
+
 ;; Multiple cursors
 ;;
 ;; Use <insert> to place cursor on the next match for the selection
@@ -24,6 +30,7 @@
 
 ;; Use C-c <tab> to auto-indent the entire buffer
 (defun indent-buffer ()
+  "Auto indent entire buffer."
   (interactive)
   (indent-region (point-min) (point-max)))
 
@@ -40,3 +47,4 @@
   :diminish volatile-highlights-mode)
 
 (provide 'zf-editing)
+;;; zf-editing ends here
