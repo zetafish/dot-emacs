@@ -46,5 +46,13 @@
   (volatile-highlights-mode t)
   :diminish volatile-highlights-mode)
 
+;;(setq tab-width 4)
+
+;; ;; Automatic indent
+;; (use-package auto-indent-mode
+;; 	:config
+;; 	(auto-indent-global-mode))
+
+
 (provide 'zf-editing)
 ;;; zf-editing ends here

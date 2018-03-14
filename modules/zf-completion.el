@@ -16,12 +16,12 @@
 
   ;; Set some default configuration
   (setq company-minimum-prefix-length 2
-	company-selection-wrap-around t
-	company-show-numbers t
-	company-tooltip-align-annotations t
-	company-require-match nil
-	company-dabbrev-downcase nil
-	company-dabbrev-ignore-case nil)
+        company-selection-wrap-around t
+        company-show-numbers t
+        company-tooltip-align-annotations t
+        company-require-match nil
+        company-dabbrev-downcase nil
+        company-dabbrev-ignore-case nil)
 
   ;; Sort completion candidates that already occur in the current
   ;; buffer at the top of the candidate list

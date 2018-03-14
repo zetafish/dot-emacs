@@ -8,3 +8,8 @@ auto-save-list/
 .python-environments/
 ac-comphist.dat
 custom.el
+eshell/
+request/
+jars/
+tramp
+git/

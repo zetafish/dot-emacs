@@ -2,32 +2,340 @@
 
 ;;; Commentary:
 ;;; Code:
-1(package-initialize)
 
+;; Startup
 (setq inhibit-splash-screen t)
 
+;; Get rid of noise.
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+(setq ring-bell-function 'ignore)
 
-;;(set-frame-font "Fira Mono-13" nil t)
-(set-frame-font "Monaco" nil t)
+;; Backup settings.
+(setq backup-by-copying t)
+(setq backup-directory-alist '(("." . "~/.saves")))
+(setq delete-old-versions t)
+(setq kept-new-versions 6)
+(setq kept-old-versions 2)
+(setq version-control t)
 
-(setq dotfiles-dir user-emacs-directory)
 
-(setq custom-file (expand-file-name "custom.el" dotfiles-dir))
+(column-number-mode)        ; Show column in modeline.
+(which-function-mode)       ; Show current function in modeline.
+(display-time)              ; Show time in modeline.
+(display-battery-mode)      ; Show battery in modeline.
+
+(show-paren-mode 1)         ; Highlight matching braces.
+
+;; (set-frame-font "Fira Mono-13" nil t)
+(set-frame-font "Monaco-12" nil t)
+
+(global-set-key (kbd "C-c <tab>") 'indent-buffer)
+(global-set-key (kbd "M-j") 'join-line)
+(global-set-key (kbd "RET") 'newline-and-indent)
+
+;; Turn off tabs.
+(set-default 'indent-tabs-mode nil)
+
+(defun present-on ()
+  "Enter presentation mode."
+  (interactive)
+  ;;(load-theme 'leuven)
+  (set-frame-font "Monaco-24" nil t)
+  (set-frame-parameter nil 'fullscreen 'fullboth))
+
+(defun present-off ()
+  "Leave presentation mode."
+  (interactive)
+  ;;(load-theme 'grandshell)
+  (set-frame-font "Monaco-12" nil t)
+  (set-frame-parameter nil 'fullscreen 'fullboth))
+
+(package-initialize)
+
+(require 'package)
+
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(require 'use-package)
+
+(setq use-package-always-ensure t)
+
+(use-package grandshell-theme)
+
+(use-package diminish)
+
+(use-package highlight-parentheses
+  :commands highlight-parentheses-mode
+  :config
+  (highlight-parentheses-mode 1)
+  (add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
+  :diminish highlight-parentheses-mode)
+
+(use-package paredit
+  :demand t
+  :commands paredit-mode
+  :config
+  (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+  (add-hook 'clojure-mode-hook 'eldoc-mode)
+  (define-key lisp-mode-shared-map (kbd "C-c v") 'eval-buffer)
+  :diminish paredit-mode)
+
+(use-package paxedit
+  :commands paxedit-mode
+  :config
+  (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+  (add-hook 'clojure-mode-hook 'eldoc-mode))
+
+(use-package nyan-mode
+  :config
+  (nyan-mode 1)
+  (setq nyan-bar-length 16
+        nyan-wavy-trail t))
+
+(use-package transpose-frame)
+
+(use-package company
+  :demand t
+  :commands company-mode
+  :config
+
+  ;; Enable company-mode globally.
+  (global-company-mode)
+
+  ;; Except when in term-mode
+  (setq company-global-modes '(not term-mode))
+
+  ;; Set some default configuration
+  (setq company-minimum-prefix-length 2
+        company-selection-wrap-around t
+        company-show-numbers t
+        company-tooltip-align-annotations t
+        company-require-match nil
+        company-dabbrev-downcase nil
+        company-dabbrev-ignore-case nil)
+
+  ;; Sort completion candidates that already occur in the current
+  ;; buffer at the top of the candidate list
+  (setq company-transformers '(company-sort-by-occurrence))
+
+  :diminish company-mode)
+
+(use-package company-quickhelp
+  :config
+  (setq company-quickhelp-delay 1)
+  (company-quickhelp-mode 1))
+
+(use-package company-try-hard
+  :commands company-try-hard
+  :bind ("C-\\" . company-try-hard))
+
+(use-package company-emoji
+  :config
+  (company-emoji-init))
+
+(use-package magit
+  :commands magit-status
+  :bind (("C-x g" . magit-status)))
+
+(use-package gist)
+
+(use-package git-gutter-fringe
+  :config
+  (global-git-gutter-mode t)
+  :diminish git-gutter-mode)
+
+(use-package helm
+  :config
+  (require 'helm-config)
+  (require 'helm)
+  (helm-mode 1)
+  (with-eval-after-load "zf-project"
+    (use-package helm-projectile
+      :bind (("C-c C-f" . helm-projectile-find-file-dwim)
+             ("C-x C-g" . helm-projectile-grep))
+      :config (helm-projectile-on)))
+  (setq-default helm-display-header-line nil
+                helm-autoresize-min-height 10
+                helm-autoresize-max-height 35
+                helm-split-window-in-side-p t
+                helm-M-x-fuzzy-match t
+                helm-buffer-fuzzy-matching t
+                helm-recentf-fuzzy-match t
+                helm-apropos-fuzzy-match t)
+  (set-face-attribute 'helm-source-header nil :height 0.75)
+
+  :bind (("M-x" . helm-M-x)
+         ("C-x C-f" . helm-find-files)
+         ("C-x C-g" . helm-do-grep)
+         ("C-x b" . helm-buffers-list)
+         ("C-x c g" . helm-google-suggest)
+         ("C-t" . helm-imenu)
+         ("M-y" . helm-show-kill-ring))
+
+  :diminish helm-mode)
+
+(use-package swiper-helm
+  :bind (("C-S-s" . swiper-helm)))
+
+(use-package helm-flx
+  :config
+  (with-eval-after-load "helm"
+    (require 'helm-flx)
+    (helm-flx-mode 1)))
+
+(use-package helm-ext
+  :config
+  (helm-ext-ff-enable-skipping-dots t)
+  (helm-ext-ff-enable-auto-path-expansion t))
+
+
+;; Multiple cursors
+;;
+;; Use <insert> to place cursor on the next match for the selection
+;; Use S-<insert> to place on the previous match
+;; Use C-' to use extended mark mode
+;; Use C-" to place cursor on all matches
+;; Select a region and C-M-' to place cursors on each line of the selection
+(use-package multiple-cursors
+  :commands multiple-cursors-mode
+  :config
+  (bind-keys :map mc/keymap
+             ("C-'" . nil))
+  :bind (("<insert>" . mc/mark-next-like-this)
+         ("S-<insert>" . mc/mark-previous-like-this)
+         ("C-'" . mc/mark-more-like-this-extended)
+         ("C-\"" . mc/mark-all-like-this-dwim)
+         ("C-M-'" . mc/edit-lines)))
+
+;; Use C-= to select innermost logical unit the cursor is on. Keep
+;; hitting C-= to expand it to the next logical unit.
+(use-package expand-region
+  :commands er/expand-region
+  :bind ("C-=" . er/expand-region))
+
+;; Use C-c <tab> to auto-indent the entire buffer
+(defun indent-buffer ()
+  "Auto indent entire buffer."
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
+;; Highlight areas with certain operations, such as undo, kill, yank.
+(use-package volatile-highlights
+  :commands volatile-highlights-mode
+  :config
+  (volatile-highlights-mode t)
+  :diminish volatile-highlights-mode)
+
+(use-package ethan-wspace
+  :demand t
+  :commands ethan-wspace-mode
+  :config
+  (global-ethan-wspace-mode t)
+  :bind ("C-c c" . ethan-wspace-clean-all)
+  :diminish ethan-wspace-mode)
+
+(use-package terraform-mode)
+
+(use-package company-terraform
+  :init
+  (company-terraform-init))
+
+(use-package markdown-mode
+  :ensure t
+  :commands markdown-mode gfm-mode
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+
+
+(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+(add-hook 'clojure-mode-hook 'eldoc-mode)
+
+(use-package eros
+  :config
+  (add-hook 'emacs-lisp-mode-hook 'eros-mode))
+
+(when (memq window-system '(mac ns))
+  (use-package exec-path-from-shell
+    :ensure t
+    :config (exec-path-from-shell-initialize)))
+
+(use-package python)
+
+(use-package yaml-mode)
+
+(use-package elpy
+  :init
+  (elpy-enable))
+
+(use-package sphinx-doc
+  :config
+  (add-hook 'python-mode-hook 'sphinx-doc-mode))
+
+(use-package rjsx-mode
+  :init)
+
+(use-package prettier-js
+  :config
+  (add-hook 'rjsx-mode-hook 'prettier-js-mode))
+
+(use-package add-node-modules-path
+  :config
+  (add-hook 'rjsx-mode-hook 'add-node-modules-path))
+
+(use-package clj-refactor
+  :commands clj-refactor-mode
+  :config
+  (cljr-add-keybindings-with-prefix "C-c C-m")
+  (add-hook 'clojure-mode-hook 'eldoc-mode))
+
+(use-package cider
+  :commands cider-mode)
+
+(use-package clojure-mode
+  :commands clojure
+  :config
+  (setq clojure-indent-style :align-arguments)
+  (add-hook 'clojure-mode-hook
+            (lambda ()
+              (define-clojure-indent
+                ;; Core
+                (send-off 1)
+
+                ;; Compojure
+                (ANY 2) (GET 2) (POST 2) (PUT 2) (PATCH 2) (DELETE 2) (OPTIONS 2) (context 2)
+
+                ;; Expect-call
+                (expect-call 1)
+
+                ;; Om
+                (render 1)))))
+
+(use-package flycheck-clojure
+  :config
+  (eval-after-load 'flycheck '(flycheck-clojure-setup))
+  (add-hook 'after-init-hook 'global-flycheck-mode))
+
+(use-package flycheck-pos-tip
+  :config
+  (eval-after-load 'flycheck '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
+
+
+(setq-default js-indent-level 2)
+(setq-default js2-indent-level 2)
+(setq-default jsx-indent-level 2)
+
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
-(add-to-list 'load-path (expand-file-name "modules" dotfiles-dir))
-
-(require 'zf-packages)
-(require 'zf-appearance)
-(require 'zf-completion)
-(require 'zf-git)
-(require 'zf-helm)
-(require 'zf-editing)
-(require 'zf-codestyle)
-(require 'zf-elisp)
-(require 'zf-python)
-(require 'zf-clojure)
+(provide 'init)
 ;;; init.el ends here

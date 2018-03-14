@@ -16,11 +16,36 @@
     (add-to-list 'company-backends 'company-jedi))
   (add-hook 'python-mode-hook 'config/enable-company-jedi))
 
-(use-package elpy)
+(use-package elpy
+  :init
+  (elpy-enable))
+
+;; (use-package python
+;;   :init
+;;   (setq python-indent 4)
+;;   :config
+;;   (add-hook 'python-mode-hook
+;;             (lambda ()
+;;               (princ "I am kin")
+;;               (setq python-indent 4)
+;;               (setq python-indent-offset 4)
+;;               (princ (symbol-value 'python-indent-offset)))))
 
 (use-package python)
 
 (use-package yaml-mode)
+
+(use-package sphinx-doc
+  :config
+  (add-hook 'python-mode-hook (lambda ()
+                                (sphinx-doc-mode t))))
+
+(setq-default flycheck-emacs-lisp-load-path 'inherit
+                flycheck-check-syntax-automatically '(save mode-enabled)
+                flycheck-standard-error-navigation nil
+                flycheck-checker-error-threshold nil ;; no limit to errors
+                flycheck-disabled-checkers '(emacs-lisp-checkdoc
+                                             python-flake8))
 
 (provide 'zf-python)
 
