@@ -84,15 +84,15 @@
   :commands paredit-mode
   :config
   (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
-  (add-hook 'clojure-mode-hook 'eldoc-mode)
+  (add-hook 'clojure-mode-hook 'enable-paredit-mode)
   (define-key lisp-mode-shared-map (kbd "C-c v") 'eval-buffer)
   :diminish paredit-mode)
 
 (use-package paxedit
   :commands paxedit-mode
   :config
-  (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
-  (add-hook 'clojure-mode-hook 'eldoc-mode))
+  (add-hook 'emacs-lisp-mode-hook 'enable-paxedit-mode)
+  (add-hook 'clojure-mode-hook 'enabled-paxedit-mode))
 
 (use-package nyan-mode
   :config
@@ -286,11 +286,13 @@
 
 (use-package prettier-js
   :config
-  (add-hook 'rjsx-mode-hook 'prettier-js-mode))
+  (add-hook 'rjsx-mode-hook 'prettier-js-mode)
+  (add-hook 'js-mode-hook 'prettier-js-mode)
+  (add-hook 'js2-mode-hook 'prettier-js-mode))
 
 (use-package add-node-modules-path
   :config
-  (add-hook 'rjsx-mode-hook 'add-node-modules-path))
+  (add-hook 'prettier-js-mode-hook 'add-node-modules-path))
 
 (use-package clj-refactor
   :commands clj-refactor-mode
@@ -299,7 +301,11 @@
   (add-hook 'clojure-mode-hook 'eldoc-mode))
 
 (use-package cider
-  :commands cider-mode)
+  :commands cider-mode
+  ;; :bind (("C-c C-t t" . cider-test-run-test)
+  ;;        ("C-c C-t n" . cider-test-run-ns-tests)
+  ;;        ("C-M-x" . cider-eval-last-sexp))
+  )
 
 (use-package clojure-mode
   :commands clojure
@@ -320,19 +326,24 @@
                 ;; Om
                 (render 1)))))
 
-(use-package flycheck-clojure
-  :config
-  (eval-after-load 'flycheck '(flycheck-clojure-setup))
-  (add-hook 'after-init-hook 'global-flycheck-mode))
+;; (use-package flycheck-clojure
+;;   :config
+;;   (eval-after-load 'flycheck '(flycheck-clojure-setup))
+;;   (add-hook 'after-init-hook 'global-flycheck-mode))
 
 (use-package flycheck-pos-tip
   :config
   (eval-after-load 'flycheck '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
 
+(use-package make-mode)
+
+(use-package groovy-mode)
 
 (setq-default js-indent-level 2)
 (setq-default js2-indent-level 2)
 (setq-default jsx-indent-level 2)
+(setq-default sgml-basic-offset 2)
+(setq-default js2-basic-offset 2)
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
