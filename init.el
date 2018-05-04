@@ -20,6 +20,8 @@
 (setq kept-old-versions 2)
 (setq version-control t)
 
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
 
 (column-number-mode)        ; Show column in modeline.
 (which-function-mode)       ; Show current function in modeline.
@@ -83,6 +85,7 @@
   :demand t
   :commands paredit-mode
   :config
+  (add-hook 'lisp-mode-hook 'enable-paredit-mode)
   (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
   (add-hook 'clojure-mode-hook 'enable-paredit-mode)
   (define-key lisp-mode-shared-map (kbd "C-c v") 'eval-buffer)
@@ -144,6 +147,8 @@
 (use-package magit
   :commands magit-status
   :bind (("C-x g" . magit-status)))
+
+(use-package diff-hl)
 
 (use-package gist)
 
@@ -277,12 +282,14 @@
   :init
   (elpy-enable))
 
+(use-package py-yapf
+  :config)
+
 (use-package sphinx-doc
   :config
   (add-hook 'python-mode-hook 'sphinx-doc-mode))
 
-(use-package rjsx-mode
-  :init)
+(use-package rjsx-mode)
 
 (use-package prettier-js
   :config
@@ -298,7 +305,7 @@
   :commands clj-refactor-mode
   :config
   (cljr-add-keybindings-with-prefix "C-c C-m")
-  (add-hook 'clojure-mode-hook 'eldoc-mode))
+  (add-hook 'clojure-mode-hook 'clj-refactor-mode))
 
 (use-package cider
   :commands cider-mode
@@ -337,7 +344,26 @@
 
 (use-package make-mode)
 
-(use-package groovy-mode)
+(use-package groovy-mode
+  :mode ("Jenkinsfile" . groovy-mode)
+  :config
+  (add-hook 'groovy-mode-hook (lambda ()
+                                (c-set-offset 'label 2))))
+
+;; (use-package flycheck
+;;   :config
+;;   (flycheck-add-mode 'javascript-eslint 'rjsx-mode))
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+(use-package flycheck-joker)
+
+(use-package slime
+  :config
+  (setq inferior-lisp-program "/usr/local/bin/sbcl")
+  (setq slime-contribs '(slime-fancy)))
 
 (setq-default js-indent-level 2)
 (setq-default js2-indent-level 2)
