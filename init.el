@@ -30,8 +30,11 @@
 
 (show-paren-mode 1)         ; Highlight matching braces.
 
-;; (set-frame-font "Fira Mono-13" nil t)
+;;(set-frame-font "Fira Mono-13" nil t)
 (set-frame-font "Monaco-12" nil t)
+;;(set-frame-font "Andale Mono-13" nil t)
+;; (set-frame-font "courier-13" nil t)
+;;(set-frame-font "inconsolata-14" nil t)
 
 (global-set-key (kbd "C-c <tab>") 'indent-buffer)
 (global-set-key (kbd "M-j") 'join-line)
@@ -43,16 +46,12 @@
 (defun present-on ()
   "Enter presentation mode."
   (interactive)
-  ;;(load-theme 'leuven)
-  (set-frame-font "Monaco-24" nil t)
-  (set-frame-parameter nil 'fullscreen 'fullboth))
+  (set-face-attribute 'default nil :height 200))
 
 (defun present-off ()
   "Leave presentation mode."
   (interactive)
-  ;;(load-theme 'grandshell)
-  (set-frame-font "Monaco-12" nil t)
-  (set-frame-parameter nil 'fullscreen 'fullboth))
+  (set-face-attribute 'default nil :height 130))
 
 (package-initialize)
 
@@ -70,7 +69,13 @@
 
 (setq use-package-always-ensure t)
 
-(use-package grandshell-theme)
+(use-package grandshell-theme :defer t)
+(use-package solarized-theme :defer t)
+(use-package monokai-theme :defer t)
+(use-package noctilux-theme :defer t)
+(use-package color-theme-sanityinc-solarized :defer t)
+
+(load-theme 'grandshell)
 
 (use-package diminish)
 
@@ -201,6 +206,16 @@
   (helm-ext-ff-enable-skipping-dots t)
   (helm-ext-ff-enable-auto-path-expansion t))
 
+;; (use-package ivy
+;;   :config
+;;   (ivy-mode 1)
+;;   (setq ivy-use-virtual-buffers t)
+;;   (setq ivy-count-format "(%d/%d) ")
+;;   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))))
+
+(use-package counsel)
+
+(use-package flx)
 
 ;; Multiple cursors
 ;;
@@ -291,6 +306,10 @@
 
 (use-package rjsx-mode)
 
+(use-package json-mode)
+
+(use-package json-reformat)
+
 (use-package prettier-js
   :config
   (add-hook 'rjsx-mode-hook 'prettier-js-mode)
@@ -308,11 +327,7 @@
   (add-hook 'clojure-mode-hook 'clj-refactor-mode))
 
 (use-package cider
-  :commands cider-mode
-  ;; :bind (("C-c C-t t" . cider-test-run-test)
-  ;;        ("C-c C-t n" . cider-test-run-ns-tests)
-  ;;        ("C-M-x" . cider-eval-last-sexp))
-  )
+  :commands cider-mode)
 
 (use-package clojure-mode
   :commands clojure
@@ -360,11 +375,24 @@
 
 (use-package flycheck-joker)
 
+(use-package clojure-mode-extra-font-locking)
+
+;;(use-package troncle)
+
 (use-package slime
   :config
   (setq inferior-lisp-program "/usr/local/bin/sbcl")
   (setq slime-contribs '(slime-fancy)))
 
+(use-package kubernetes
+  :ensure t
+  :commands (kubernetes-overview))
+
+(use-package dockerfile-mode)
+
+(use-package jira-markup-mode)
+
+(setq-default json-indent-level 4)
 (setq-default js-indent-level 2)
 (setq-default js2-indent-level 2)
 (setq-default jsx-indent-level 2)
