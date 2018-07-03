@@ -30,7 +30,7 @@
   :config
   (eval-after-load 'flycheck
     '(setq flycheck-display-errors-function
-     #'flycheck-pos-tip-error-message)))
+	   #'flycheck-pos-tip-error-message)))
 
 (use-package clojure-mode
   :commands clojure-mode
@@ -59,8 +59,8 @@
      ;; Om
      (render 1)
 
-     ;; Test
-     (thrown? 1)
+     ;; Spec
+     (s/fdef 1)
      ))
 
 

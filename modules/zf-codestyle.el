@@ -26,13 +26,13 @@
 (setq-default tab-width 2)
 
 ;; Javascript
-(setq-default js2-indent-level 4)
+(setq-default js2-indent-level 2)
 
 ;; JSON
-(setq-default js-indent-level 4)
-
+(setq-default js-indent-level 2)
+(setq-default rjsx-indent-level 2)
 ;; Python
-(setq-default py-indent-offset 2)
+;;(setq-default py-indent-offset 4)
 
 (provide 'zf-codestyle)
 ;;; zf-codestyle ends here
