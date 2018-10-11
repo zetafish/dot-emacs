@@ -58,6 +58,7 @@
 (require 'package)
 
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 
@@ -75,7 +76,7 @@
 (use-package noctilux-theme :defer t)
 (use-package color-theme-sanityinc-solarized :defer t)
 
-(load-theme 'grandshell)
+(load-theme 'grandshell t)
 
 (use-package diminish)
 
@@ -167,11 +168,6 @@
   (require 'helm-config)
   (require 'helm)
   (helm-mode 1)
-  (with-eval-after-load "zf-project"
-    (use-package helm-projectile
-      :bind (("C-c C-f" . helm-projectile-find-file-dwim)
-             ("C-x C-g" . helm-projectile-grep))
-      :config (helm-projectile-on)))
   (setq-default helm-display-header-line nil
                 helm-autoresize-min-height 10
                 helm-autoresize-max-height 35
@@ -276,6 +272,7 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
+(use-package rainbow-mode)
 
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 (add-hook 'clojure-mode-hook 'eldoc-mode)
@@ -321,13 +318,34 @@
   (add-hook 'prettier-js-mode-hook 'add-node-modules-path))
 
 (use-package clj-refactor
+  ;; :pin melpa-stable
   :commands clj-refactor-mode
   :config
   (cljr-add-keybindings-with-prefix "C-c C-m")
   (add-hook 'clojure-mode-hook 'clj-refactor-mode))
 
 (use-package cider
-  :commands cider-mode)
+  :commands cider-mode
+  ;; :pin melpa-stable
+  :bind (("C-c C-t t" . cider-test-run-test)
+         ("C-c C-t n" . cider-test-run-ns-tests)
+         ("C-M-x" . cider-eval-last-sexp)))
+
+(use-package helm-cider
+  :config
+  (add-hook 'clojure-mode-hook 'helm-cider-mode))
+
+(use-package sayid
+  :config
+  (eval-after-load 'clojure-mode
+    '(sayid-setup-package)))
+
+(use-package projectile
+  :ensure t
+  ;; :pin melpa-stable
+  :config
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (projectile-mode +1))
 
 (use-package clojure-mode
   :commands clojure
@@ -340,10 +358,14 @@
                 (send-off 1)
 
                 ;; Compojure
-                (ANY 2) (GET 2) (POST 2) (PUT 2) (PATCH 2) (DELETE 2) (OPTIONS 2) (context 2)
+                (ANY 2) (GET 2) (POST 2) (PUT 2) (PATCH 2)
+                (DELETE 2) (OPTIONS 2) (context 2)
 
                 ;; Expect-call
                 (expect-call 1)
+
+                ;; Specter
+                (recursive-path 1)
 
                 ;; Om
                 (render 1)))))
@@ -377,6 +399,8 @@
 
 (use-package clojure-mode-extra-font-locking)
 
+;;(use-package flower)
+
 ;;(use-package troncle)
 
 (use-package slime
@@ -392,10 +416,14 @@
 
 (use-package jira-markup-mode)
 
+;;(use-package web-mode)
+
+(use-package helm-ag)
+
 (setq-default json-indent-level 4)
 (setq-default js-indent-level 2)
-(setq-default js2-indent-level 2)
-(setq-default jsx-indent-level 2)
+(setq-default js2-indent-level 4)
+(setq-default jsx-indent-level 4)
 (setq-default sgml-basic-offset 2)
 (setq-default js2-basic-offset 2)
 
