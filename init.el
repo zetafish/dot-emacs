@@ -33,8 +33,11 @@
 ;;(set-frame-font "Fira Mono-13" nil t)
 (set-frame-font "Monaco-12" nil t)
 ;;(set-frame-font "Andale Mono-13" nil t)
-;; (set-frame-font "courier-13" nil t)
-;;(set-frame-font "inconsolata-14" nil t)
+;;(set-frame-font "courier-13" nil t)
+;;(set-frame-font "Monofur-13" nil t)
+;;(set-frame-font "Hack-12" nil t)
+;;(set-frame-font "Sauce Code Powerline-12" nil t)
+;;(set-frame-font "Inconsolata-13" nil t)
 
 (global-set-key (kbd "C-c <tab>") 'indent-buffer)
 (global-set-key (kbd "M-j") 'join-line)
@@ -51,7 +54,7 @@
 (defun present-off ()
   "Leave presentation mode."
   (interactive)
-  (set-face-attribute 'default nil :height 130))
+  (set-face-attribute 'default nil :height 120))
 
 (package-initialize)
 
@@ -61,6 +64,8 @@
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+
+;;(add-to-list 'load-path "~/.emacs.d/elisp")
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -91,9 +96,9 @@
   :demand t
   :commands paredit-mode
   :config
-  (add-hook 'lisp-mode-hook 'enable-paredit-mode)
-  (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
-  (add-hook 'clojure-mode-hook 'enable-paredit-mode)
+  (add-hook 'lisp-mode-hook 'paredit-mode)
+  (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+  (add-hook 'clojure-mode-hook 'paredit-mode)
   (define-key lisp-mode-shared-map (kbd "C-c v") 'eval-buffer)
   :diminish paredit-mode)
 
@@ -153,6 +158,8 @@
 (use-package magit
   :commands magit-status
   :bind (("C-x g" . magit-status)))
+
+(use-package gitignore-mode)
 
 (use-package diff-hl)
 
@@ -275,6 +282,7 @@
 (use-package rainbow-mode)
 
 (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+
 (add-hook 'clojure-mode-hook 'eldoc-mode)
 
 (use-package eros
@@ -290,12 +298,12 @@
 
 (use-package yaml-mode)
 
-(use-package elpy
-  :init
-  (elpy-enable))
+;; (use-package elpy
+;;   :init
+;;   (elpy-enable))
 
-(use-package py-yapf
-  :config)
+;; (use-package py-yapf
+;;   :config)
 
 (use-package sphinx-doc
   :config
@@ -350,30 +358,19 @@
 (use-package clojure-mode
   :commands clojure
   :config
-  (setq clojure-indent-style :align-arguments)
+  (setq clojure-indent-style :always-align)
   (add-hook 'clojure-mode-hook
             (lambda ()
               (define-clojure-indent
-                ;; Core
-                (send-off 1)
-
-                ;; Compojure
-                (ANY 2) (GET 2) (POST 2) (PUT 2) (PATCH 2)
-                (DELETE 2) (OPTIONS 2) (context 2)
-
-                ;; Expect-call
-                (expect-call 1)
-
-                ;; Specter
-                (recursive-path 1)
-
-                ;; Om
-                (render 1)))))
+                (context 2) (GET 2) (POST 2) (DELETE 2) (PATCH 2))))
+  ;;(add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+  )
 
 ;; (use-package flycheck-clojure
 ;;   :config
 ;;   (eval-after-load 'flycheck '(flycheck-clojure-setup))
 ;;   (add-hook 'after-init-hook 'global-flycheck-mode))
+(use-package flycheck-clojure)
 
 (use-package flycheck-pos-tip
   :config
@@ -399,10 +396,6 @@
 
 (use-package clojure-mode-extra-font-locking)
 
-;;(use-package flower)
-
-;;(use-package troncle)
-
 (use-package slime
   :config
   (setq inferior-lisp-program "/usr/local/bin/sbcl")
@@ -416,9 +409,36 @@
 
 (use-package jira-markup-mode)
 
-;;(use-package web-mode)
-
 (use-package helm-ag)
+
+(use-package ini-mode)
+
+(use-package jsonnet-mode)
+
+;;(use-package company-jedi)
+(use-package python-docstring)
+(use-package sphinx-doc)
+(use-package python
+  :config (setq python-shell-interpreter "python"
+                python-shell-interpreter-args "--profile=dev -i")
+  :init
+  (add-hook 'python-mode-hook (lambda ()
+                                  (auto-complete-mode -1)
+                                (python-docstring-mode)
+                                (sphinx-doc-mode))))
+
+(use-package blacken
+  :init
+  (add-hook 'python-mode-hook 'blacken-mode))
+
+(use-package magit-popup)
+
+(use-package kubernetes
+  :ensure t
+  :commands (kubernetes-overview))
+
+(use-package protobuf-mode)
+(use-package nginx-mode)
 
 (setq-default json-indent-level 4)
 (setq-default js-indent-level 2)
