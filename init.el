@@ -12,6 +12,7 @@
 (scroll-bar-mode -1)
 (setq ring-bell-function 'ignore)
 
+
 ;; Backup settings.
 (setq backup-by-copying t)
 (setq backup-directory-alist '(("." . "~/.saves")))
@@ -22,7 +23,6 @@
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-
 (column-number-mode)        ; Show column in modeline.
 (which-function-mode)       ; Show current function in modeline.
 (display-time)              ; Show time in modeline.
@@ -32,12 +32,14 @@
 
 ;;(set-frame-font "Fira Mono-13" nil t)
 (set-frame-font "Monaco-12" nil t)
-;;(set-frame-font "Andale Mono-13" nil t)
-;;(set-frame-font "courier-13" nil t)
-;;(set-frame-font "Monofur-13" nil t)
-;;(set-frame-font "Hack-12" nil t)
-;;(set-frame-font "Sauce Code Powerline-12" nil t)
-;;(set-frame-font "Inconsolata-13" nil t)
+;; (set-frame-font "Mono-12" nil t)
+;; (set-frame-font "Courier New-13" nil t)
+;; (set-frame-font "Andale Mono-13" nil t)
+;; (set-frame-font "courier-13" nil t)
+;; (set-frame-font "Monofur-13" nil t)
+;; (set-frame-font "Hack-12" nil t)
+;; (set-frame-font "Sauce Code Powerline-12" nil t)
+;; (set-frame-font "Inconsolata-13" nil t)
 
 (global-set-key (kbd "C-c <tab>") 'indent-buffer)
 (global-set-key (kbd "M-j") 'join-line)
@@ -45,6 +47,9 @@
 
 ;; Turn off tabs.
 (set-default 'indent-tabs-mode nil)
+
+;; Automatically reload files when they change
+(global-auto-revert-mode t)
 
 (defun present-on ()
   "Enter presentation mode."
@@ -65,7 +70,7 @@
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 
-;;(add-to-list 'load-path "~/.emacs.d/elisp")
+(add-to-list 'load-path "~/.emacs.d/elisp")
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -80,10 +85,20 @@
 (use-package monokai-theme :defer t)
 (use-package noctilux-theme :defer t)
 (use-package color-theme-sanityinc-solarized :defer t)
+(use-package dracula-theme :defer t)
+(use-package doom-themes :defer t)
 
-(load-theme 'grandshell t)
+;;(load-theme 'grandshell t)
+;;(load-theme 'dracula t)
+;;(load-theme 'doom-sourcerer t)
+;;(load-theme 'doom-tomorrow-night t)
+;;(load-theme 'doom-tomorrow-day t)
+;;(load-theme 'doom-vibrant  t)
+(load-theme 'doom-one t)
 
-(use-package diminish)
+(use-package diminish
+  :config
+  (diminish 'eldoc-mode))
 
 (use-package highlight-parentheses
   :commands highlight-parentheses-mode
@@ -151,9 +166,9 @@
   :commands company-try-hard
   :bind ("C-\\" . company-try-hard))
 
-(use-package company-emoji
-  :config
-  (company-emoji-init))
+;; (use-package company-emoji
+;;   :config
+;;   (company-emoji-init))
 
 (use-package magit
   :commands magit-status
@@ -161,101 +176,114 @@
 
 (use-package gitignore-mode)
 
-(use-package diff-hl)
+(use-package diff-hl
+  :config
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 
-(use-package gist)
+;; (use-package gist)
 
 (use-package git-gutter-fringe
   :config
   (global-git-gutter-mode t)
   :diminish git-gutter-mode)
 
-(use-package helm
-  :config
-  (require 'helm-config)
-  (require 'helm)
-  (helm-mode 1)
-  (setq-default helm-display-header-line nil
-                helm-autoresize-min-height 10
-                helm-autoresize-max-height 35
-                helm-split-window-in-side-p t
-                helm-M-x-fuzzy-match t
-                helm-buffer-fuzzy-matching t
-                helm-recentf-fuzzy-match t
-                helm-apropos-fuzzy-match t)
-  (set-face-attribute 'helm-source-header nil :height 0.75)
-
-  :bind (("M-x" . helm-M-x)
-         ("C-x C-f" . helm-find-files)
-         ("C-x C-g" . helm-do-grep)
-         ("C-x b" . helm-buffers-list)
-         ("C-x c g" . helm-google-suggest)
-         ("C-t" . helm-imenu)
-         ("M-y" . helm-show-kill-ring))
-
-  :diminish helm-mode)
-
-(use-package swiper-helm
-  :bind (("C-S-s" . swiper-helm)))
-
-(use-package helm-flx
-  :config
-  (with-eval-after-load "helm"
-    (require 'helm-flx)
-    (helm-flx-mode 1)))
-
-(use-package helm-ext
-  :config
-  (helm-ext-ff-enable-skipping-dots t)
-  (helm-ext-ff-enable-auto-path-expansion t))
-
-;; (use-package ivy
+;; (use-package helm
 ;;   :config
-;;   (ivy-mode 1)
-;;   (setq ivy-use-virtual-buffers t)
-;;   (setq ivy-count-format "(%d/%d) ")
-;;   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))))
+;;   (require 'helm-config)
+;;   (require 'helm)
+;;   (helm-mode 1)
+;;   (setq-default helm-display-header-line nil
+;;                 helm-autoresize-min-height 10
+;;                 helm-autoresize-max-height 35
+;;                 helm-split-window-in-side-p t
+;;                 helm-M-x-fuzzy-match t
+;;                 helm-buffer-fuzzy-matching t
+;;                 helm-recentf-fuzzy-match t
+;;                 helm-apropos-fuzzy-match t)
+;;   (set-face-attribute 'helm-source-header nil :height 0.75)
+;;   (customize-set-variable 'helm-ff-lynx-style-map t)
 
-(use-package counsel)
+;;   :bind (("M-x" . helm-M-x)
+;;          ("C-x C-f" . helm-find-files)
+;;          ("C-x C-g" . helm-do-grep)
+;;          ("C-x b" . helm-buffers-list)
+;;          ("C-x c g" . helm-google-suggest)
+;;          ("C-t" . helm-imenu)
+;;          ("M-y" . helm-show-kill-ring)
+;;          )
+
+;;   :diminish helm-mode)
+
+;; (use-package swiper-helm
+;;   :bind (("C-S-s" . swiper-helm)))
+
+;; (use-package helm-flx
+;;   :config
+;;   (with-eval-after-load "helm"
+;;     (require 'helm-flx)
+;;     (helm-flx-mode 1)))
+
+;; (use-package helm-ext
+;;   :config
+;;   (helm-ext-ff-enable-skipping-dots t)
+;;   (helm-ext-ff-enable-auto-path-expansion t))
+
+(use-package ivy
+  :config
+  (ivy-mode 1)
+  (counsel-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq ivy-re-builders-alist '(
+                                (t . ivy--regex-fuzzy)
+                                ;;(t . ivy--regex-ignore-order)
+                                ))
+  (setq ivy-display-style 'plain)
+  :bind (("C-s" . swiper-isearch)
+         ("C-x C-f" . counsel-find-file)
+         ("C-x b" . counsel-switch-buffer)
+         ("C-r" . counsel-minibuffer-history))
+  ;;:diminish ivy-mode counsel-mode
+  )
 
 (use-package flx)
 
-;; Multiple cursors
-;;
-;; Use <insert> to place cursor on the next match for the selection
-;; Use S-<insert> to place on the previous match
-;; Use C-' to use extended mark mode
-;; Use C-" to place cursor on all matches
-;; Select a region and C-M-' to place cursors on each line of the selection
-(use-package multiple-cursors
-  :commands multiple-cursors-mode
-  :config
-  (bind-keys :map mc/keymap
-             ("C-'" . nil))
-  :bind (("<insert>" . mc/mark-next-like-this)
-         ("S-<insert>" . mc/mark-previous-like-this)
-         ("C-'" . mc/mark-more-like-this-extended)
-         ("C-\"" . mc/mark-all-like-this-dwim)
-         ("C-M-'" . mc/edit-lines)))
+;; ;; Multiple cursors
+;; ;;
+;; ;; Use <insert> to place cursor on the next match for the selection
+;; ;; Use S-<insert> to place on the previous match
+;; ;; Use C-' to use extended mark mode
+;; ;; Use C-" to place cursor on all matches
+;; ;; Select a region and C-M-' to place cursors on each line of the selection
+;; (use-package multiple-cursors
+;;   :commands multiple-cursors-mode
+;;   :config
+;;   (bind-keys :map mc/keymap
+;;              ("C-'" . nil))
+;;   :bind (("<insert>" . mc/mark-next-like-this)
+;;          ("S-<insert>" . mc/mark-previous-like-this)
+;;          ("C-'" . mc/mark-more-like-this-extended)
+;;          ("C-\"" . mc/mark-all-like-this-dwim)
+;;          ("C-M-'" . mc/edit-lines)))
 
-;; Use C-= to select innermost logical unit the cursor is on. Keep
-;; hitting C-= to expand it to the next logical unit.
-(use-package expand-region
-  :commands er/expand-region
-  :bind ("C-=" . er/expand-region))
+;; ;; Use C-= to select innermost logical unit the cursor is on. Keep
+;; ;; hitting C-= to expand it to the next logical unit.
+;; (use-package expand-region
+;;   :commands er/expand-region
+;;   :bind ("C-=" . er/expand-region))
 
-;; Use C-c <tab> to auto-indent the entire buffer
-(defun indent-buffer ()
-  "Auto indent entire buffer."
-  (interactive)
-  (indent-region (point-min) (point-max)))
+;; ;; Use C-c <tab> to auto-indent the entire buffer
+;; (defun indent-buffer ()
+;;   "Auto indent entire buffer."
+;;   (interactive)
+;;   (indent-region (point-min) (point-max)))
 
-;; Highlight areas with certain operations, such as undo, kill, yank.
-(use-package volatile-highlights
-  :commands volatile-highlights-mode
-  :config
-  (volatile-highlights-mode t)
-  :diminish volatile-highlights-mode)
+;; ;; Highlight areas with certain operations, such as undo, kill, yank.
+;; (use-package volatile-highlights
+;;   :commands volatile-highlights-mode
+;;   :config
+;;   (volatile-highlights-mode t)
+;;   :diminish volatile-highlights-mode)
 
 (use-package ethan-wspace
   :demand t
@@ -265,19 +293,13 @@
   :bind ("C-c c" . ethan-wspace-clean-all)
   :diminish ethan-wspace-mode)
 
-(use-package terraform-mode)
-
-(use-package company-terraform
-  :init
-  (company-terraform-init))
-
-(use-package markdown-mode
-  :ensure t
-  :commands markdown-mode gfm-mode
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
+;; (use-package markdown-mode
+;;   :ensure t
+;;   :commands markdown-mode gfm-mode
+;;   :mode (("README\\.md\\'" . gfm-mode)
+;;          ("\\.md\\'" . markdown-mode)
+;;          ("\\.markdown\\'" . markdown-mode))
+;;   :init (setq markdown-command "multimarkdown"))
 
 (use-package rainbow-mode)
 
@@ -285,29 +307,25 @@
 
 (add-hook 'clojure-mode-hook 'eldoc-mode)
 
-(use-package eros
-  :config
-  (add-hook 'emacs-lisp-mode-hook 'eros-mode))
-
 (when (memq window-system '(mac ns))
   (use-package exec-path-from-shell
     :ensure t
     :config (exec-path-from-shell-initialize)))
 
-(use-package python)
+;; (use-package python)
 
-(use-package yaml-mode)
+;; (use-package yaml-mode)
 
-;; (use-package elpy
-;;   :init
-;;   (elpy-enable))
+;; ;; (use-package elpy
+;; ;;   :init
+;; ;;   (elpy-enable))
 
-;; (use-package py-yapf
-;;   :config)
+;; ;; (use-package py-yapf
+;; ;;   :config)
 
-(use-package sphinx-doc
-  :config
-  (add-hook 'python-mode-hook 'sphinx-doc-mode))
+;; (use-package sphinx-doc
+;;   :config
+;;   (add-hook 'python-mode-hook 'sphinx-doc-mode))
 
 (use-package rjsx-mode)
 
@@ -326,7 +344,6 @@
   (add-hook 'prettier-js-mode-hook 'add-node-modules-path))
 
 (use-package clj-refactor
-  ;; :pin melpa-stable
   :commands clj-refactor-mode
   :config
   (cljr-add-keybindings-with-prefix "C-c C-m")
@@ -334,14 +351,9 @@
 
 (use-package cider
   :commands cider-mode
-  ;; :pin melpa-stable
   :bind (("C-c C-t t" . cider-test-run-test)
          ("C-c C-t n" . cider-test-run-ns-tests)
          ("C-M-x" . cider-eval-last-sexp)))
-
-(use-package helm-cider
-  :config
-  (add-hook 'clojure-mode-hook 'helm-cider-mode))
 
 (use-package sayid
   :config
@@ -350,7 +362,6 @@
 
 (use-package projectile
   :ensure t
-  ;; :pin melpa-stable
   :config
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (projectile-mode +1))
@@ -366,86 +377,77 @@
   ;;(add-hook 'clojure-mode-hook #'aggressive-indent-mode)
   )
 
-;; (use-package flycheck-clojure
-;;   :config
-;;   (eval-after-load 'flycheck '(flycheck-clojure-setup))
-;;   (add-hook 'after-init-hook 'global-flycheck-mode))
+(use-package flycheck-clojure
+  :config
+  (eval-after-load 'flycheck '(flycheck-clojure-setup))
+  (add-hook 'after-init-hook 'global-flycheck-mode))
+
 (use-package flycheck-clojure)
 
-(use-package flycheck-pos-tip
-  :config
-  (eval-after-load 'flycheck '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
-
-(use-package make-mode)
-
-(use-package groovy-mode
-  :mode ("Jenkinsfile" . groovy-mode)
-  :config
-  (add-hook 'groovy-mode-hook (lambda ()
-                                (c-set-offset 'label 2))))
-
-;; (use-package flycheck
-;;   :config
-;;   (flycheck-add-mode 'javascript-eslint 'rjsx-mode))
+;; ;; (use-package flycheck-pos-tip
+;; ;;   :config
+;; ;;   (eval-after-load 'flycheck '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
 
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode))
+  :config
+  (add-hook 'after-init-hook #'global-flycheck-mode))
 
-(use-package flycheck-joker)
+(use-package flycheck-joker
+  :demand t)
+
+(use-package flycheck-clj-kondo
+  :demand t)
+
+(dolist (checkers '((clj-kondo-clj . clojure-joker)
+                    (clj-kondo-cljs . clojurescript-joker)
+                    (clj-kondo-cljc . clojure-joker)
+                    (clj-kondo-edn . edn-joker)))
+  (flycheck-add-next-checker (car checkers) (cons 'error (cdr checkers))))
 
 (use-package clojure-mode-extra-font-locking)
 
-(use-package slime
-  :config
-  (setq inferior-lisp-program "/usr/local/bin/sbcl")
-  (setq slime-contribs '(slime-fancy)))
+(use-package docker-compose-mode)
 
-(use-package kubernetes
-  :ensure t
-  :commands (kubernetes-overview))
+;; (use-package slime
+;;   :config
+;;   (setq inferior-lisp-program "/usr/local/bin/sbcl")
+;;   (setq slime-contribs '(slime-fancy)))
 
-(use-package dockerfile-mode)
 
-(use-package jira-markup-mode)
+;; (use-package jsonnet-mode)
 
-(use-package helm-ag)
-
-(use-package ini-mode)
-
-(use-package jsonnet-mode)
-
-;;(use-package company-jedi)
-(use-package python-docstring)
-(use-package sphinx-doc)
-(use-package python
-  :config (setq python-shell-interpreter "python"
-                python-shell-interpreter-args "--profile=dev -i")
-  :init
-  (add-hook 'python-mode-hook (lambda ()
-                                  (auto-complete-mode -1)
-                                (python-docstring-mode)
-                                (sphinx-doc-mode))))
+;; ;;(use-package company-jedi)
+;; (use-package python-docstring)
+;; (use-package sphinx-doc)
+;; (use-package python
+;;   :config (setq python-shell-interpreter "python"
+;;                 python-shell-interpreter-args "--profile=dev -i")
+;;   :init
+;;   (add-hook 'python-mode-hook (lambda ()
+;;                                   (auto-complete-mode -1)
+;;                                 (python-docstring-mode)
+;;                                 (sphinx-doc-mode))))
 
 (use-package blacken
   :init
   (add-hook 'python-mode-hook 'blacken-mode))
 
-(use-package magit-popup)
+;; (use-package protobuf-mode)
+;; (use-package nginx-mode)
+;; (use-package emojify
+;;   :init
+;;   (add-hook 'after-init-hook #'global-emojify-mode))
 
-(use-package kubernetes
-  :ensure t
-  :commands (kubernetes-overview))
+(use-package go-mode)
 
-(use-package protobuf-mode)
-(use-package nginx-mode)
-
-(setq-default json-indent-level 4)
+(setq-default json-indent-level 2)
 (setq-default js-indent-level 2)
 (setq-default js2-indent-level 4)
 (setq-default jsx-indent-level 4)
 (setq-default sgml-basic-offset 2)
 (setq-default js2-basic-offset 2)
+(setq-default css-indent-offset 2)
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)

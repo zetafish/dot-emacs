@@ -16,3 +16,7 @@ git/
 abbrev_defs
 url/
 transient/
+\#*
+.\#*
+ido.last
+projectile-bookmarks.eld
