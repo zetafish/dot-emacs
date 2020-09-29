@@ -91,10 +91,11 @@
 ;;(load-theme 'grandshell t)
 ;;(load-theme 'dracula t)
 ;;(load-theme 'doom-sourcerer t)
-;;(load-theme 'doom-tomorrow-night t)
+(load-theme 'doom-tomorrow-night t)
 ;;(load-theme 'doom-tomorrow-day t)
 ;;(load-theme 'doom-vibrant  t)
-(load-theme 'doom-one t)
+;;(load-theme 'doom-one t)
+;;(load-theme 'leuven t)
 
 (use-package diminish
   :config
@@ -105,6 +106,7 @@
   :config
   (highlight-parentheses-mode 1)
   (add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
+  (add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
   :diminish highlight-parentheses-mode)
 
 (use-package paredit
@@ -351,6 +353,9 @@
 
 (use-package cider
   :commands cider-mode
+  :config
+  (setq cider-clojure-cli-global-options "-R:dev:test")
+  ;;(setq cider-clojure-cli-global-options "-R:dev:test -C:dev:test")
   :bind (("C-c C-t t" . cider-test-run-test)
          ("C-c C-t n" . cider-test-run-ns-tests)
          ("C-M-x" . cider-eval-last-sexp)))
@@ -372,6 +377,7 @@
   (setq clojure-indent-style :always-align)
   (add-hook 'clojure-mode-hook
             (lambda ()
+              (rainbow-delimiters-mode-enable)
               (define-clojure-indent
                 (context 2) (GET 2) (POST 2) (DELETE 2) (PATCH 2))))
   ;;(add-hook 'clojure-mode-hook #'aggressive-indent-mode)
@@ -441,6 +447,10 @@
 
 (use-package go-mode)
 
+(use-package yafolding)
+
+;;(use-package restclient)
+
 (setq-default json-indent-level 2)
 (setq-default js-indent-level 2)
 (setq-default js2-indent-level 4)
@@ -448,6 +458,25 @@
 (setq-default sgml-basic-offset 2)
 (setq-default js2-basic-offset 2)
 (setq-default css-indent-offset 2)
+
+
+;; See: https://orgmode.org/worg/org-tutorials/orgtutorial_dto.html
+(setq org-agenda-files (list "~/todo.org"))
+;;(setq org-todo-keywords '((sequence "TODO")))
+
+;; (global-set-key (kbd "C-c a") 'org-agenda)
+;; (setq org-agenda-files (quote "/Users/endymion/todo.org"))
+;; (setq org-highest-priority ?A)
+;; (setq org-lowest-priority ?C)
+;; (setq org-default-priority ?B)
+;; (setq org-priority-faces '((?A . (:foreground "#F0DFAF" :weight bold))
+;;                            (?B . (:foreground "LightSteelBlue"))
+;;                            (?C . (:foreground "OliveDrab"))))
+;; (define-key global-map (kbd "C-c c") 'org-capture)
+;; (setq org-capture-templates
+;;       '(("t" "todo" entry (file+headline "/Users/endymion/todo.org" "Tasks")
+;;          "* TODO [#A] %?")))
+
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
