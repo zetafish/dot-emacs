@@ -31,7 +31,7 @@
 (show-paren-mode 1)         ; Highlight matching braces.
 
 ;;(set-frame-font "Fira Mono-13" nil t)
-(set-frame-font "Monaco-12" nil t)
+(set-frame-font "Monaco-15" nil t)
 ;; (set-frame-font "Mono-12" nil t)
 ;; (set-frame-font "Courier New-13" nil t)
 ;; (set-frame-font "Andale Mono-13" nil t)
@@ -98,32 +98,32 @@
 ;;(load-theme 'leuven t)
 
 (use-package diminish
-  :config
-  (diminish 'eldoc-mode))
+ :config
+ (diminish 'eldoc-mode))
 
 (use-package highlight-parentheses
-  :commands highlight-parentheses-mode
-  :config
-  (highlight-parentheses-mode 1)
-  (add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
-  (add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
-  :diminish highlight-parentheses-mode)
+ :commands highlight-parentheses-mode
+ :config
+ (highlight-parentheses-mode 1)
+ (add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
+ (add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
+ :diminish highlight-parentheses-mode)
 
 (use-package paredit
-  :demand t
-  :commands paredit-mode
-  :config
-  (add-hook 'lisp-mode-hook 'paredit-mode)
-  (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-  (add-hook 'clojure-mode-hook 'paredit-mode)
-  (define-key lisp-mode-shared-map (kbd "C-c v") 'eval-buffer)
-  :diminish paredit-mode)
+ :demand t
+ :commands paredit-mode
+ :config
+ (add-hook 'lisp-mode-hook 'paredit-mode)
+ (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+ (add-hook 'clojure-mode-hook 'paredit-mode)
+ (define-key lisp-mode-shared-map (kbd "C-c v") 'eval-buffer)
+ :diminish paredit-mode)
 
 (use-package paxedit
-  :commands paxedit-mode
-  :config
-  (add-hook 'emacs-lisp-mode-hook 'enable-paxedit-mode)
-  (add-hook 'clojure-mode-hook 'enabled-paxedit-mode))
+ :commands paxedit-mode
+ :config
+ (add-hook 'emacs-lisp-mode-hook 'enable-paxedit-mode)
+ (add-hook 'clojure-mode-hook 'enabled-paxedit-mode))
 
 (use-package nyan-mode
   :config
@@ -133,40 +133,40 @@
 
 (use-package transpose-frame)
 
-(use-package company
-  :demand t
-  :commands company-mode
-  :config
+;; (use-package company
+;;   :demand t
+;;   :commands company-mode
+;;   :config
 
-  ;; Enable company-mode globally.
-  (global-company-mode)
+;;   ;; Enable company-mode globally.
+;;   (global-company-mode)
 
-  ;; Except when in term-mode
-  (setq company-global-modes '(not term-mode))
+;;   ;; Except when in term-mode
+;;   (setq company-global-modes '(not term-mode))
 
-  ;; Set some default configuration
-  (setq company-minimum-prefix-length 2
-        company-selection-wrap-around t
-        company-show-numbers t
-        company-tooltip-align-annotations t
-        company-require-match nil
-        company-dabbrev-downcase nil
-        company-dabbrev-ignore-case nil)
+;;   ;; Set some default configuration
+;;   (setq company-minimum-prefix-length 2
+;;         company-selection-wrap-around t
+;;         company-show-numbers t
+;;         company-tooltip-align-annotations t
+;;         company-require-match nil
+;;         company-dabbrev-downcase nil
+;;         company-dabbrev-ignore-case nil)
 
-  ;; Sort completion candidates that already occur in the current
-  ;; buffer at the top of the candidate list
-  (setq company-transformers '(company-sort-by-occurrence))
+;;   ;; Sort completion candidates that already occur in the current
+;;   ;; buffer at the top of the candidate list
+;;   (setq company-transformers '(company-sort-by-occurrence))
 
-  :diminish company-mode)
+;;   :diminish company-mode)
 
-(use-package company-quickhelp
-  :config
-  (setq company-quickhelp-delay 1)
-  (company-quickhelp-mode 1))
+;; (use-package company-quickhelp
+;;   :config
+;;   (setq company-quickhelp-delay 1)
+;;   (company-quickhelp-mode 1))
 
-(use-package company-try-hard
-  :commands company-try-hard
-  :bind ("C-\\" . company-try-hard))
+;; (use-package company-try-hard
+;;   :commands company-try-hard
+;;   :bind ("C-\\" . company-try-hard))
 
 ;; (use-package company-emoji
 ;;   :config
@@ -189,64 +189,18 @@
   (global-git-gutter-mode t)
   :diminish git-gutter-mode)
 
-;; (use-package helm
-;;   :config
-;;   (require 'helm-config)
-;;   (require 'helm)
-;;   (helm-mode 1)
-;;   (setq-default helm-display-header-line nil
-;;                 helm-autoresize-min-height 10
-;;                 helm-autoresize-max-height 35
-;;                 helm-split-window-in-side-p t
-;;                 helm-M-x-fuzzy-match t
-;;                 helm-buffer-fuzzy-matching t
-;;                 helm-recentf-fuzzy-match t
-;;                 helm-apropos-fuzzy-match t)
-;;   (set-face-attribute 'helm-source-header nil :height 0.75)
-;;   (customize-set-variable 'helm-ff-lynx-style-map t)
-
-;;   :bind (("M-x" . helm-M-x)
-;;          ("C-x C-f" . helm-find-files)
-;;          ("C-x C-g" . helm-do-grep)
-;;          ("C-x b" . helm-buffers-list)
-;;          ("C-x c g" . helm-google-suggest)
-;;          ("C-t" . helm-imenu)
-;;          ("M-y" . helm-show-kill-ring)
-;;          )
-
-;;   :diminish helm-mode)
-
-;; (use-package swiper-helm
-;;   :bind (("C-S-s" . swiper-helm)))
-
-;; (use-package helm-flx
-;;   :config
-;;   (with-eval-after-load "helm"
-;;     (require 'helm-flx)
-;;     (helm-flx-mode 1)))
-
-;; (use-package helm-ext
-;;   :config
-;;   (helm-ext-ff-enable-skipping-dots t)
-;;   (helm-ext-ff-enable-auto-path-expansion t))
+(use-package counsel)
 
 (use-package ivy
   :config
   (ivy-mode 1)
   (counsel-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "(%d/%d) ")
-  (setq ivy-re-builders-alist '(
-                                (t . ivy--regex-fuzzy)
-                                ;;(t . ivy--regex-ignore-order)
-                                ))
-  (setq ivy-display-style 'plain)
+  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
   :bind (("C-s" . swiper-isearch)
          ("C-x C-f" . counsel-find-file)
          ("C-x b" . counsel-switch-buffer)
          ("C-r" . counsel-minibuffer-history))
-  ;;:diminish ivy-mode counsel-mode
-  )
+  :diminish ivy-mode counsel-mode)
 
 (use-package flx)
 
@@ -360,10 +314,10 @@
          ("C-c C-t n" . cider-test-run-ns-tests)
          ("C-M-x" . cider-eval-last-sexp)))
 
-(use-package sayid
-  :config
-  (eval-after-load 'clojure-mode
-    '(sayid-setup-package)))
+;; (use-package sayid
+;;   :config
+;;   (eval-after-load 'clojure-mode
+;;     '(sayid-setup-package)))
 
 (use-package projectile
   :ensure t
@@ -383,12 +337,12 @@
   ;;(add-hook 'clojure-mode-hook #'aggressive-indent-mode)
   )
 
-(use-package flycheck-clojure
-  :config
-  (eval-after-load 'flycheck '(flycheck-clojure-setup))
-  (add-hook 'after-init-hook 'global-flycheck-mode))
+;; (use-package flycheck-clojure
+;;   :config
+;;   (eval-after-load 'flycheck '(flycheck-clojure-setup))
+;;   (add-hook 'after-init-hook 'global-flycheck-mode))
 
-(use-package flycheck-clojure)
+;; (use-package flycheck-clojure)
 
 ;; ;; (use-package flycheck-pos-tip
 ;; ;;   :config
@@ -438,12 +392,6 @@
 (use-package blacken
   :init
   (add-hook 'python-mode-hook 'blacken-mode))
-
-;; (use-package protobuf-mode)
-;; (use-package nginx-mode)
-;; (use-package emojify
-;;   :init
-;;   (add-hook 'after-init-hook #'global-emojify-mode))
 
 (use-package go-mode)
 
