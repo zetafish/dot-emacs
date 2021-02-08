@@ -67,7 +67,7 @@
 
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 
 (add-to-list 'load-path "~/.emacs.d/elisp")
@@ -98,16 +98,16 @@
 ;;(load-theme 'leuven t)
 
 (use-package diminish
- :config
- (diminish 'eldoc-mode))
+  :config
+  (diminish 'eldoc-mode))
 
 (use-package highlight-parentheses
- :commands highlight-parentheses-mode
- :config
- (highlight-parentheses-mode 1)
- (add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
- (add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
- :diminish highlight-parentheses-mode)
+  :commands highlight-parentheses-mode
+  :config
+  (highlight-parentheses-mode 1)
+  (add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
+  (add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
+  :diminish highlight-parentheses-mode)
 
 (use-package paredit
  :demand t
@@ -116,14 +116,31 @@
  (add-hook 'lisp-mode-hook 'paredit-mode)
  (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
  (add-hook 'clojure-mode-hook 'paredit-mode)
- (define-key lisp-mode-shared-map (kbd "C-c v") 'eval-buffer)
  :diminish paredit-mode)
 
 (use-package paxedit
- :commands paxedit-mode
- :config
- (add-hook 'emacs-lisp-mode-hook 'enable-paxedit-mode)
- (add-hook 'clojure-mode-hook 'enabled-paxedit-mode))
+  :commands paxedit-mode
+  :config
+  (add-hook 'emacs-lisp-mode-hook 'enable-paxedit-mode)
+  (add-hook 'clojure-mode-hook 'enabled-paxedit-mode)
+  :bind (:map paxedit-mode-map
+              ("M-<right>" . paxedit-transpose-forward)
+              ("M-<left>" . paxedit-transpose-backward)
+              ("M-<up>" . paxedit-backward-up)
+              ("M-<down>" . paxedit-backward-end)
+              ("M-b" . paxedit-previous-symbol)
+              ("M-f" . paxedit-next-symbol)
+              ("C-&" . paxedit-kill)
+              ("C-%" . paxedit-copy)
+              ("C-*" . paxedit-delete)
+              ("C-^" . paxedit-sexp-raise)
+              ;; Symbol backward/forward kill
+              ("C-w" . paxedit-backward-kill)
+              ("M-w" . paxedit-forward-kill)
+              ;; Symbol manipulation
+              ("M-u" . paxedit-symbol-change-case)
+              ("C-@" . paxedit-symbol-copy)
+              ("C-#" . paxedit-symbol-kill)))
 
 (use-package nyan-mode
   :config
@@ -132,45 +149,6 @@
         nyan-wavy-trail t))
 
 (use-package transpose-frame)
-
-;; (use-package company
-;;   :demand t
-;;   :commands company-mode
-;;   :config
-
-;;   ;; Enable company-mode globally.
-;;   (global-company-mode)
-
-;;   ;; Except when in term-mode
-;;   (setq company-global-modes '(not term-mode))
-
-;;   ;; Set some default configuration
-;;   (setq company-minimum-prefix-length 2
-;;         company-selection-wrap-around t
-;;         company-show-numbers t
-;;         company-tooltip-align-annotations t
-;;         company-require-match nil
-;;         company-dabbrev-downcase nil
-;;         company-dabbrev-ignore-case nil)
-
-;;   ;; Sort completion candidates that already occur in the current
-;;   ;; buffer at the top of the candidate list
-;;   (setq company-transformers '(company-sort-by-occurrence))
-
-;;   :diminish company-mode)
-
-;; (use-package company-quickhelp
-;;   :config
-;;   (setq company-quickhelp-delay 1)
-;;   (company-quickhelp-mode 1))
-
-;; (use-package company-try-hard
-;;   :commands company-try-hard
-;;   :bind ("C-\\" . company-try-hard))
-
-;; (use-package company-emoji
-;;   :config
-;;   (company-emoji-init))
 
 (use-package magit
   :commands magit-status
@@ -249,19 +227,13 @@
   :bind ("C-c c" . ethan-wspace-clean-all)
   :diminish ethan-wspace-mode)
 
-;; (use-package markdown-mode
-;;   :ensure t
-;;   :commands markdown-mode gfm-mode
-;;   :mode (("README\\.md\\'" . gfm-mode)
-;;          ("\\.md\\'" . markdown-mode)
-;;          ("\\.markdown\\'" . markdown-mode))
-;;   :init (setq markdown-command "multimarkdown"))
-
 (use-package rainbow-mode)
 
-(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+(use-package rainbow-delimiters)
 
-(add-hook 'clojure-mode-hook 'eldoc-mode)
+;;(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+
+;;(add-hook 'clojure-mode-hook 'eldoc-mode)
 
 (when (memq window-system '(mac ns))
   (use-package exec-path-from-shell
@@ -305,6 +277,8 @@
   (cljr-add-keybindings-with-prefix "C-c C-m")
   (add-hook 'clojure-mode-hook 'clj-refactor-mode))
 
+
+
 (use-package cider
   :commands cider-mode
   :config
@@ -314,10 +288,10 @@
          ("C-c C-t n" . cider-test-run-ns-tests)
          ("C-M-x" . cider-eval-last-sexp)))
 
-;; (use-package sayid
-;;   :config
-;;   (eval-after-load 'clojure-mode
-;;     '(sayid-setup-package)))
+(use-package sayid
+  :config
+  (eval-after-load 'clojure-mode
+    '(sayid-setup-package)))
 
 (use-package projectile
   :ensure t
