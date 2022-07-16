@@ -30,7 +30,7 @@
 (global-linum-mode)         ; Show line numbers
 
 ;;(set-frame-font "Monaco-14" nil t)
-(set-frame-font "JetBrains Mono-15" nil t)
+;;(set-frame-font "JetBrains Mono-15" nil t)
 ;;(set-frame-font "Courier New-13" nil t)
 ;;(set-frame-font "Andale Mono-15" nil t)
 ;;(set-frame-font "courier-13" nil t)
@@ -271,7 +271,7 @@
 (use-package flycheck-clj-kondo
   :ensure t)
 
-(load-library "cljstyle-mode.el")
+;;(load-library "cljstyle-mode.el")
 
 (use-package zprint-mode
   :config
