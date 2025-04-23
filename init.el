@@ -27,9 +27,9 @@
 (display-time)              ; Show time in modeline.
 (display-battery-mode)      ; Show battery in modeline.
 (show-paren-mode 1)         ; Highlight matching braces.
-(global-linum-mode)         ; Show line numbers
+;;(global-linum-mode)         ; Show line numbers
 
-;;(set-frame-font "Monaco-14" nil t)
+(set-frame-font "Monaco-14" nil t)
 ;;(set-frame-font "JetBrains Mono-15" nil t)
 ;;(set-frame-font "Courier New-13" nil t)
 ;;(set-frame-font "Andale Mono-15" nil t)
@@ -72,25 +72,26 @@
 (use-package grandshell-theme :defer t)
 (use-package solarized-theme :defer t)
 (use-package monokai-theme :defer t)
-(use-package noctilux-theme :defer t)
 (use-package color-theme-sanityinc-solarized :defer t)
 (use-package dracula-theme :defer t)
 (use-package doom-themes :defer t)
 (use-package ubuntu-theme :defer t)
 (use-package gotham-theme :defer t)
 
-;;(load-theme 'ubuntu)
-;;(load-theme 'gotham)
-;;(load-theme 'grandshell t)
-;;(load-theme 'doom-acario-dark)
-;;(load-theme 'dracula t)
-;;(load-theme 'doom-sourcerer t)
-;;(load-theme 'doom-tomorrow-night t)
-;;(load-theme 'doom-tomorrow-day t)
-;;(load-theme 'doom-city-lights)
-;;(load-theme 'doom-vibrant  t)
-(load-theme 'doom-one t)
-;;(load-theme 'leuven t)
+;; ;; dark
+;; (load-theme 'ubuntu)
+;; (load-theme 'gotham)
+;; (load-theme 'grandshell t)
+;; (load-theme 'doom-acario-dark)
+;; (load-theme 'dracula t)
+;; (load-theme 'doom-sourcerer t)
+(load-theme 'doom-tomorrow-night t)
+;; (load-theme 'doom-city-lights)
+;; (load-theme 'doom-vibrant  t)
+;; (load-theme 'doom-one t)
+;; ;; light
+;; (load-theme 'doom-tomorrow-day t)
+;; (load-theme 'leuven t)
 
 (use-package diminish)
 
@@ -231,24 +232,24 @@
   :config
   (add-hook 'prettier-js-mode-hook 'add-node-modules-path))
 
-(use-package lsp-mode
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  :hook ((clojure-mode . lsp)
-         (clojurescript-mode . lsp)
-         (clojurec-mode . lsp)
-         (lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp)
+;; (use-package lsp-mode
+;;   :init
+;;   (setq lsp-keymap-prefix "C-c l")
+;;   :hook ((clojure-mode . lsp)
+;;          (clojurescript-mode . lsp)
+;;          (clojurec-mode . lsp)
+;;          (lsp-mode . lsp-enable-which-key-integration))
+;;   :commands lsp)
 
-(use-package lsp-ui :commands lsp-ui-mode
-  :config
-  (setq lsp-ui-sideline-show-diagnostics t)
-  (setq lsp-ui-sideline-show-code-actions nil)
-  (setq lsp-ui-sideline-update-mode 'point))
+;; (use-package lsp-ui :commands lsp-ui-mode
+;;   :config
+;;   (setq lsp-ui-sideline-show-diagnostics t)
+;;   (setq lsp-ui-sideline-show-code-actions nil)
+;;   (setq lsp-ui-sideline-update-mode 'point))
 
 
-(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+;; (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+;; (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
 
 (use-package which-key
@@ -261,7 +262,8 @@
   ;; :global/:workspace/:file
   ;;(lsp-lens-mode)
   (setq lsp-modeline-diagnostics-scope :workspace)
-  (setq lsp-headerline-breadcrumb-enable nil))
+  (setq lsp-headerline-breadcrumb-enable nil)
+  (setq lsp-lens-enable nil))
 
 (use-package clj-refactor
   :commands clj-refactor-mode
@@ -282,7 +284,8 @@
 (use-package clojure-mode
   :ensure t
   :config
-  (add-hook 'clojure-mode-hook 'cljstyle-mode)
+  ;;(add-hook 'clojure-mode-hook 'cljstyle-mode)
+  (add-hook 'clojure-mode-hook 'paredit-mode)
   (require 'flycheck-clj-kondo))
 
 (use-package kaocha-runner

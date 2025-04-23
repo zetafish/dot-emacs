@@ -20,3 +20,5 @@ transient/
 .\#*
 ido.last
 projectile-bookmarks.eld
+.cache/
+.lsp*
